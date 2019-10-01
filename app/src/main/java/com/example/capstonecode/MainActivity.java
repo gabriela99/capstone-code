@@ -1,92 +1,108 @@
 package com.example.capstonecode;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
-import com.lorentzos.flingswipe.SwipeFlingAdapterView;
+import android.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
-
-// Taken from swipe card library: https://github.com/Diolor/Swipecards/blob/master/example/src/main/java/com/lorentzos/swipecards/MyActivity.java
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<String> al;
-    private ArrayAdapter<String> arrayAdapter;
-    private int i;
+    private Toolbar mToolbar;
+    private ProgressBar mProgressBar;
+    private EditText mEmail, mPassword;
+    private Button mLogin, mRegister;
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        al = new ArrayList<>();
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mEmail = (EditText) findViewById(R.id.etEmail);
+        mPassword = (EditText) findViewById(R.id.etPassword);
+        mLogin = (Button) findViewById(R.id.btnLogin);
+        mRegister = (Button) findViewById(R.id.btnRegister);
 
-        // With each add, a new card (person) is added to the "al" array
-        al.add("person1");
-        al.add("person2");
-        al.add("person3");
-        al.add("person4");
-        al.add("person5");
-        al.add("person6");
-        al.add("person7");
-        al.add("person8");
+        mToolbar.setTitle(R.string.app_name);
 
-        // Layout refers to how the card looks
-        arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
+        // Make connection to firebase
+        mAuth = FirebaseAuth.getInstance();
 
-        SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
-
-        flingContainer.setAdapter(arrayAdapter);
-        flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
+        firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void removeFirstObjectInAdapter() {
-                // This deletes an object from the Adapter (/AdapterView)
-                Log.d("LIST", "removed object!");
-                al.remove(0);
-                arrayAdapter.notifyDataSetChanged();
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }
             }
+        };
 
-            @Override
-            public void onLeftCardExit(Object dataObject) {
-                // Do something on the left
-                // You also have access to the original object.
-                // If you want to use it just cast it (String) dataObject
-                Toast.makeText(MainActivity.this, "Left!", Toast.LENGTH_SHORT).show();
-            }
 
+        mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onRightCardExit(Object dataObject) {
-                Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
-            }
+            public void onClick(View view) {
+                mProgressBar.setVisibility(View.VISIBLE);
+                final String email = mEmail.getText().toString();
+                final String password = mPassword.getText().toString();
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        mProgressBar.setVisibility(View.GONE);
+                        if(!task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
 
-            @Override
-            public void onAdapterAboutToEmpty(int itemsInAdapter) {
-                // Ask for more data here
-                al.add("XML ".concat(String.valueOf(i)));
-                arrayAdapter.notifyDataSetChanged();
-                Log.d("LIST", "notified");
-                i++;
-            }
-
-            @Override
-            public void onScroll(float scrollProgressPercent) {
             }
         });
 
-
-        // Optionally add an OnItemClickListener
-        flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
+        mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClicked(int itemPosition, Object dataObject) {
-                Toast.makeText(MainActivity.this, "Click.", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
+                startActivity(intent);
+                finish();
+                return;
             }
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(firebaseAuthStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(firebaseAuthStateListener);
     }
 }

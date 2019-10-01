@@ -7,39 +7,39 @@
     tools:context=".RegistrationActivity"
     android:orientation="vertical">
     <TextView
+        android:id="@+id/registertitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Let's get started!"
-        android:id="@+id/registertitle"/>
+        android:text="Let's get started!"/>
     <TextView
+        android:id="@+id/registersubtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create your account to take your next step in your career."
-        android:id="@+id/registersubtitle"/>
+        android:text="Create your account to take your next step in your career."/>
     <EditText
+        android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="name"
-        android:id="@+id/name"/>
+        android:hint="name"/>
     <EditText
+        android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="email"
-        android:id="@+id/email"/>
+        android:hint="email"/>
     <EditText
+        android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="password"
-        android:id="@+id/password"/>
+        android:hint="password"/>
     <Button
+        android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:id="@+id/register"/>
+        android:text="Sign Up"/>
     <TextView
+        android:id="@+id/loginoptions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Or sign up using"
-        android:id="@+id/loginoptions"/>
+        android:text="Or sign up using"/>
 
 </LinearLayout>
