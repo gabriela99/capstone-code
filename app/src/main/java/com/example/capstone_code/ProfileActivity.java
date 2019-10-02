@@ -24,7 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intToMain = new Intent(ProfileActivity.this, RegisterActivity.class);
+                Intent intToMain = new Intent(ProfileActivity.this, MainActivity.class);
                 startActivity(intToMain);
             }
         });
