@@ -7,8 +7,6 @@
     tools:context=".RegisterActivity">
 
     <!-- Let’s get started! -->
-
-    <!-- Create your account to take your next step in your career. -->
     <TextView
         android:id="@+id/let_s_get_s"
         android:layout_width="match_parent"
@@ -17,13 +15,14 @@
         android:layout_alignParentTop="true"
         android:layout_marginBottom="52dp"
         android:gravity="center"
-        android:text="@string/let_s_get_s"
-        android:textAppearance="@style/let_s_get_s"
+        android:text="Let's get started!"
+        android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/userName"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.869"
         tools:layout_editor_absoluteX="0dp" />
 
+    <!-- Create your account to take your next step in your career. -->
     <TextView
         android:id="@+id/create_your"
         android:layout_width="match_parent"
@@ -38,6 +37,7 @@
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="0dp" />
 
+    <!-- Full Name -->
     <EditText
         android:id="@+id/userName"
         android:layout_width="wrap_content"
@@ -56,6 +56,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Email -->
     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
@@ -74,6 +75,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Password -->
     <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
@@ -88,6 +90,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintVertical_bias="0.052" />
+
+    <!-- Repeat Password -->
+    <EditText
+        android:id="@+id/repeatPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="Repeat Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2"
         app:layout_constraintVertical_bias="0.052" />
 
 
@@ -108,7 +127,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Sign Up"
@@ -116,21 +134,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toBottomOf="@+id/repeatPassword"
+        app:layout_constraintVertical_bias="0.309" />
 
-    <TextView
-        android:id="@+id/or_sign_up_"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
-        android:gravity="center_horizontal|top"
-        android:text="Or sign up using"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:layout_constraintVertical_bias="0.101"
-        tools:layout_editor_absoluteX="0dp" />
+<!--    <TextView-->
+<!--        android:id="@+id/or_sign_up_"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:gravity="center_horizontal|top"-->
+<!--        android:text="Or sign up using"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/textView"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button2"-->
+<!--        app:layout_constraintVertical_bias="0.101"-->
+<!--        tools:layout_editor_absoluteX="0dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
