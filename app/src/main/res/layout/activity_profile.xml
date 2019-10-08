@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/ivProfileImage"
-        android:layout_width="100sp"
-        android:layout_height="100sp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@mipmap/ic_launcher"
         android:layout_marginBottom="40dp"
         android:layout_gravity="center"

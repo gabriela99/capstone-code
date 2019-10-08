@@ -24,10 +24,17 @@ public class ProfileActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.logout);
         btnSettings = findViewById(R.id.settings);
 
-//        email = mFirebaseAuth.getInstance().getCurrentUser().getEmail();
-
         TextView email = (TextView)findViewById(R.id.email);
-        email.setText(mFirebaseAuth.getInstance().getCurrentUser().getEmail()); //set text for text view
+        email.setText(mFirebaseAuth.getInstance().getCurrentUser().getEmail());
+
+//        TextView name = (TextView)findViewById(R.id.etUserName);
+//        name.setText(mFirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+
+//        TextView role = (TextView)findViewById(R.id.etRole);
+//        role.setText(mFirebaseAuth.getInstance().getCurrentUser().get???());
+//
+//        TextView skills = (TextView)findViewById(R.id.etSkills);
+//        skills.setText(mFirebaseAuth.getInstance().getCurrentUser().get???());
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

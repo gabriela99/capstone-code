@@ -22,9 +22,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class does..
+ *
+ */
 public class RegisterActivity extends AppCompatActivity {
     private EditText etEmailId, etPassword, etName;
-    private Button btnSignUp;
+    private Button btnRegister;
     private TextView tvSignIn;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
@@ -51,13 +55,13 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         etName = findViewById(R.id.etName);
-        etEmailId = findViewById(R.id.editText);
-        etPassword = findViewById(R.id.editText2);
+        etEmailId = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
 
-        btnSignUp = findViewById(R.id.button2);
-        tvSignIn = findViewById(R.id.textView);
+        btnRegister = findViewById(R.id.btnRegister);
+        tvSignIn = findViewById(R.id.btnSignIn);
 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             final String name = etName.getText().toString();

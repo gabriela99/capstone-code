@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        emailId = findViewById(R.id.editText);
-        password = findViewById(R.id.editText2);
+        emailId = findViewById(R.id.etEmail);
+        password = findViewById(R.id.etPassword);
         btnSignIn = findViewById(R.id.button2);
-        tvSignUp = findViewById(R.id.textView);
+        tvSignUp = findViewById(R.id.tvRegister);
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
