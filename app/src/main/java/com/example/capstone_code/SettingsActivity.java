@@ -35,7 +35,7 @@ import java.util.Map;
 public class SettingsActivity extends AppCompatActivity {
 
     private ImageView mProfileImage;
-    private EditText mUserName, mEmail, mRole, mSkills;
+    private EditText mUserName, mRole, mSkills;
     private Button confirmSettings, backToProfile;
     private FirebaseAuth mAuth;
     private DatabaseReference mCustomerDatabase;
@@ -52,7 +52,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         mProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
         mUserName = (EditText) findViewById(R.id.etUserName);
-        mEmail = (EditText) findViewById(R.id.etEmail);
         mRole = (EditText) findViewById(R.id.etRole);
         mSkills = (EditText) findViewById(R.id.etSkills);
         confirmSettings = (Button) findViewById(R.id.btnConfirmSettings);
