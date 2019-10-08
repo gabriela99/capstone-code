@@ -9,11 +9,17 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class SettingsActivity extends AppCompatActivity {
 
     private ImageView mProfileImage;
     private EditText mUserName, mEmail, mRole, mSkills;
     private Button confirmSettings, backToProfile;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mCustomerDatabase;
 
 
     @Override
@@ -29,6 +35,27 @@ public class SettingsActivity extends AppCompatActivity {
         confirmSettings = (Button) findViewById(R.id.btnConfirmSettings);
         backToProfile = (Button) findViewById(R.id.btnBackToProfile);
 
+        mAuth = FirebaseAuth.getInstance();
+        String userId = mAuth.getCurrentUser().getUid();
+        mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+
+        getUserInfo();
+
+        mProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, 1);
+            }
+        });
+
+        confirmSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveUserInformation();
+            }
+        });
 
         backToProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,5 +67,12 @@ public class SettingsActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void getUserInfo() {
+    }
+
+    private void saveUserInformation() {
+        
     }
 }
