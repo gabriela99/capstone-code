@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,8 +20,14 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
         btnLogout = findViewById(R.id.logout);
         btnSettings = findViewById(R.id.settings);
+
+//        email = mFirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        TextView email = (TextView)findViewById(R.id.email);
+        email.setText(mFirebaseAuth.getInstance().getCurrentUser().getEmail()); //set text for text view
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
