@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileActivity extends AppCompatActivity {
     Button btnLogout;
@@ -21,20 +22,10 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        displayUserInformation();
+
         btnLogout = findViewById(R.id.logout);
         btnSettings = findViewById(R.id.settings);
-
-        TextView email = (TextView)findViewById(R.id.email);
-        email.setText(mFirebaseAuth.getInstance().getCurrentUser().getEmail());
-
-//        TextView name = (TextView)findViewById(R.id.etUserName);
-//        name.setText(mFirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-
-//        TextView role = (TextView)findViewById(R.id.etRole);
-//        role.setText(mFirebaseAuth.getInstance().getCurrentUser().get???());
-//
-//        TextView skills = (TextView)findViewById(R.id.etSkills);
-//        skills.setText(mFirebaseAuth.getInstance().getCurrentUser().get???());
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,5 +44,20 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intToMain);
             }
         });
+    }
+    private void displayUserInformation() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        TextView email = (TextView)findViewById(R.id.email);
+        email.setText(user.getEmail());
+
+        TextView name = (TextView)findViewById(R.id.etUserName);
+        name.setText(user.getUid());
+
+        //        TextView role = (TextView)findViewById(R.id.etRole);
+//        role.setText(mFirebaseAuth.getInstance().getCurrentUser().getRole());
+//
+//        TextView skills = (TextView)findViewById(R.id.etSkills);
+//        skills.setText(mFirebaseAuth.getInstance().getCurrentUser().getSkills());
     }
 }
