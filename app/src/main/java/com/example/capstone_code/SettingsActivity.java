@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,6 +44,8 @@ public class SettingsActivity extends AppCompatActivity {
     private String userId, name, role, skills, profileImageUrl;
 
     private Uri resultUri;
+    String[] roles = { "Interaction Designer", "Software Engineer", "Product Manager" };
+    String[] skillOptions = { "Design thinking", "Agile", "Interpersonal skills", "Java" };
 
 
 
@@ -71,6 +75,27 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+
+        // Roles autocomplete list
+        //Create the instance of ArrayAdapter containing list of roles
+        ArrayAdapter<String> adapterRoles = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, roles);
+        //Find TextView control
+        AutoCompleteTextView acTextViewRoles = (AutoCompleteTextView) findViewById(R.id.etRole);
+        //Set the number of characters the user must type before the drop down list is shown
+        acTextViewRoles.setThreshold(0);
+        //Set the adapter
+        acTextViewRoles.setAdapter(adapterRoles);
+
+        // Skills autocomplete list
+        //Create the instance of ArrayAdapter containing list of roles
+        ArrayAdapter<String> adapterSkills = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, skillOptions);
+        //Find TextView control
+        AutoCompleteTextView acTextViewSkills = (AutoCompleteTextView) findViewById(R.id.etSkills);
+        //Set the number of characters the user must type before the drop down list is shown
+        acTextViewSkills.setThreshold(0);
+        //Set the adapter
+        acTextViewSkills.setAdapter(adapterSkills);
+
 
         confirmSettings.setOnClickListener(new View.OnClickListener() {
             @Override

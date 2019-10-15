@@ -23,14 +23,15 @@
         android:layout_gravity="center"
         android:hint="Name" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/etRole"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Role"
         android:layout_gravity="center"
         android:layout_marginBottom="20sp"/>
-    <EditText
+
+    <AutoCompleteTextView
         android:id="@+id/etSkills"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
