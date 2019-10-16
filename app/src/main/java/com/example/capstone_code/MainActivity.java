@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText emailId, password;
     private Button btnSignIn;
     private TextView tvSignUp;
+
+    // Firebase
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         emailId = findViewById(R.id.etEmail);
         password = findViewById(R.id.etPassword);
-        btnSignIn = findViewById(R.id.button2);
+        btnSignIn = findViewById(R.id.btnSignIn);
         tvSignUp = findViewById(R.id.tvRegister);
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {

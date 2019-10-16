@@ -23,9 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class does..
- *
+ * Put firebase outside of class - dependency injection
  */
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText etEmailId, etPassword, etName;
     private Button btnRegister;

@@ -44,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
     private String userId, name, role, skills, profileImageUrl;
 
     private Uri resultUri;
-    String[] roles = { "Interaction Designer", "Software Engineer", "Product Manager" };
+    String[] roleOptions = { "Interaction Designer", "Software Engineer", "Product Manager" };
     String[] skillOptions = { "Design thinking", "Agile", "Interpersonal skills", "Java" };
 
 
@@ -65,8 +65,6 @@ public class SettingsActivity extends AppCompatActivity {
         userId = mAuth.getCurrentUser().getUid();
         mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
 
-        getUserInfo();
-
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,26 +74,11 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        // Roles autocomplete list
-        //Create the instance of ArrayAdapter containing list of roles
-        ArrayAdapter<String> adapterRoles = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, roles);
-        //Find TextView control
-        AutoCompleteTextView acTextViewRoles = (AutoCompleteTextView) findViewById(R.id.etRole);
-        //Set the number of characters the user must type before the drop down list is shown
-        acTextViewRoles.setThreshold(0);
-        //Set the adapter
-        acTextViewRoles.setAdapter(adapterRoles);
+        getUserInfo();
 
-        // Skills autocomplete list
-        //Create the instance of ArrayAdapter containing list of roles
-        ArrayAdapter<String> adapterSkills = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, skillOptions);
-        //Find TextView control
-        AutoCompleteTextView acTextViewSkills = (AutoCompleteTextView) findViewById(R.id.etSkills);
-        //Set the number of characters the user must type before the drop down list is shown
-        acTextViewSkills.setThreshold(0);
-        //Set the adapter
-        acTextViewSkills.setAdapter(adapterSkills);
-
+        // Allow the user to type in a character and have autocomplete options provided from the options lists
+        autoCompleteText(roleOptions, mRole);
+        autoCompleteText(skillOptions, mSkills);
 
         confirmSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +137,20 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void autoCompleteText(String[] listOptions, EditText mField) {
+        //Create the instance of ArrayAdapter containing list of roles
+        ArrayAdapter<String> adapterRoles = new ArrayAdapter<>(this,android.R.layout.select_dialog_singlechoice, listOptions);
+
+        //Find TextView control
+        AutoCompleteTextView acTextViewRoles = (AutoCompleteTextView) mField;
+
+        //Set the number of characters the user must type before the drop down list is shown
+        acTextViewRoles.setThreshold(0);
+
+        //Set the adapter
+        acTextViewRoles.setAdapter(adapterRoles);
     }
 
     private void saveUserInformation() {
