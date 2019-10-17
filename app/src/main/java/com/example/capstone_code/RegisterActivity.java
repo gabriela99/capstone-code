@@ -60,57 +60,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         btnRegister = findViewById(R.id.btnRegister);
         tvSignIn = findViewById(R.id.btnSignIn);
-
-//        btnRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            final String name = etName.getText().toString();
-//            final String email = etEmailId.getText().toString();
-//            final String pwd = etPassword.getText().toString();
-//            if(name.isEmpty()){
-//                etName.setError("Please enter your name");
-//                etName.requestFocus();
-//            }
-//            else if(email.isEmpty()){
-//                etEmailId.setError("Please enter an email");
-//                etEmailId.requestFocus();
-//            }
-//            else if(pwd.isEmpty()){
-//                etPassword.setError("Please enter your password");
-//                etPassword.requestFocus();
-//            }
-//            else if(!(email.isEmpty() && pwd.isEmpty() && name.isEmpty())){
-//                mAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                    if(task.isSuccessful()){
-//                        String userId = mAuth.getCurrentUser().getUid();
-//                        DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-//                        Map userInfo = new HashMap<>();
-//                        userInfo.put("name", name);
-//                        userInfo.put("profileImageUrl", "default");
-//                        currentUserDb.updateChildren(userInfo);
-//                    }
-//                    else {
-//                        Toast.makeText(RegisterActivity.this,"SignUp Unsuccessful, Please Try Again",Toast.LENGTH_SHORT).show();
-//                    }
-//                    }
-//                });
-//            }
-//            else{
-//                Toast.makeText(RegisterActivity.this,"Error Occurred!",Toast.LENGTH_SHORT).show();
-//
-//            }
-//            }
-//        });
-
-        tvSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     public void registerUser(View view) {
@@ -151,6 +100,12 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this,"Error Occurred!",Toast.LENGTH_SHORT).show();
 
         }
+        return;
+    }
+
+    public void goToLogin(View view) {
+        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        startActivity(intent);
         return;
     }
 
