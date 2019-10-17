@@ -6,20 +6,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
     Button btnLogout;
@@ -30,7 +29,8 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference reference;
     private ImageView mProfileImage;
     private TextView mEmail, mUserName, mRole, mSkills;
-
+    private arrayAdapter arrayAdapter;
+    List<userDetails> rowItems;
 
 
     @Override
@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         btnSettings = findViewById(R.id.btnSettings);
 
         // Display information
-//        getUserInfo();
+        getUserInfo();
 
 
         // Logout button that brings user back to login page
@@ -75,31 +75,70 @@ public class ProfileActivity extends AppCompatActivity {
         mSkills = findViewById(R.id.etSkills);
         mUser = mFirebaseAuth.getCurrentUser();
 
+        rowItems = new ArrayList<userDetails>();
+
+        arrayAdapter = new arrayAdapter(this, R.layout.activity_main, rowItems);
+
 //        mEmail.setText(mUser.getEmail());
 
-        reference = FirebaseDatabase.getInstance().getReference().child(mUser.getUid());
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-
-//                String usernameFire = dataSnapshot.child("name").getValue().toString();
-//                String roleFire = dataSnapshot.child("role").getValue().toString();
-//                String skillsFire = dataSnapshot.child("skills").getValue().toString();
+//        reference = FirebaseDatabase.getInstance().getReference().child(mUser.getUid());
+//
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+//
+////                String usernameFire = dataSnapshot.child("name").getValue().toString();
+////                String roleFire = dataSnapshot.child("role").getValue().toString();
+////                String skillsFire = dataSnapshot.child("skills").getValue().toString();
 //                String usernameFire = map.get("name").toString();
 //
 //                mUserName.setText(usernameFire);
-//                mRole.setText(roleFire);
-//                mSkills.setText(skillsFire);
+////                mRole.setText(roleFire);
+////                mSkills.setText(skillsFire);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+    }
+
+
+    public void getUserInfo() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
+        reference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if (dataSnapshot.exists()) {
+                    userDetails userDetails = new userDetails(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString());
+                    rowItems.add(userDetails);
+                    arrayAdapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
             }
         });
     }
+}
+
+
+
+
+
 //
 //    private void getUserInfo() {
 //        mFirebaseAuth = FirebaseAuth.getInstance();
@@ -184,5 +223,5 @@ public class ProfileActivity extends AppCompatActivity {
 //            }
 //        });
 
-    }
+
 
