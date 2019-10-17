@@ -5,20 +5,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
     Button btnLogout;
     Button btnSettings;
     FirebaseAuth mFirebaseAuth;
+    FirebaseUser mUser;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-    private DatabaseReference mCustomerDatabase;
+    private DatabaseReference reference;
     private ImageView mProfileImage;
-
+    private TextView mEmail, mUserName, mRole, mSkills;
 
 
 
@@ -33,9 +44,9 @@ public class ProfileActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
         btnSettings = findViewById(R.id.btnSettings);
 
-
         // Display information
-        getUserInfo();
+//        getUserInfo();
+
 
         // Logout button that brings user back to login page
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -56,9 +67,82 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intToMain);
             }
         });
-    }
 
-    private void getUserInfo() {
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mEmail = findViewById(R.id.etEmail);
+        mUserName = findViewById(R.id.etUserName);
+        mRole = findViewById(R.id.etRole);
+        mSkills = findViewById(R.id.etSkills);
+        mUser = mFirebaseAuth.getCurrentUser();
+
+//        mEmail.setText(mUser.getEmail());
+
+        reference = FirebaseDatabase.getInstance().getReference().child(mUser.getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+
+//                String usernameFire = dataSnapshot.child("name").getValue().toString();
+//                String roleFire = dataSnapshot.child("role").getValue().toString();
+//                String skillsFire = dataSnapshot.child("skills").getValue().toString();
+//                String usernameFire = map.get("name").toString();
+//
+//                mUserName.setText(usernameFire);
+//                mRole.setText(roleFire);
+//                mSkills.setText(skillsFire);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+//
+//    private void getUserInfo() {
+//        mFirebaseAuth = FirebaseAuth.getInstance();
+//        mEmail = findViewById(R.id.etEmail);
+//        mUserName = findViewById(R.id.etUserName);
+//        mRole = findViewById(R.id.etRole);
+//        mSkills = findViewById(R.id.etSkills);
+//        mUser = mFirebaseAuth.getCurrentUser();
+//
+////        mEmail.setText(mUser.getEmail());
+//
+//        reference = FirebaseDatabase.getInstance().getReference().child(mUser.getUid());
+//
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                String usernameFire = dataSnapshot.child("name").getValue().toString();
+//                String roleFire = dataSnapshot.child("role").getValue().toString();
+//                String skillsFire = dataSnapshot.child("skills").getValue().toString();
+//
+//                Toast.makeText(getApplicationContext(), usernameFire, Toast.LENGTH_LONG).show();
+////                mUserName.setText(usernameFire);
+////                mRole.setText(roleFire);
+////                mSkills.setText(skillsFire);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+
+
+
+
+
+
+
+
+
+
+
 //
 //        mCustomerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
@@ -101,6 +185,4 @@ public class ProfileActivity extends AppCompatActivity {
 //        });
 
     }
-}
-
 
