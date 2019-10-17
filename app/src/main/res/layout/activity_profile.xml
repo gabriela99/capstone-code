@@ -54,13 +54,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:onClick="editSettings"/>
 
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:onClick="logoutUser"/>
 
 </LinearLayout>
