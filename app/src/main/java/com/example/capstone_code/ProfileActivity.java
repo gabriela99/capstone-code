@@ -3,8 +3,6 @@ package com.example.capstone_code;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,13 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
-    Button btnLogout;
-    Button btnSettings;
     FirebaseAuth mFirebaseAuth;
     FirebaseUser mUser;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
-    private DatabaseReference reference;
-    private ImageView mProfileImage;
     private arrayAdapter arrayAdapter;
     List<userDetails> rowItems;
 
@@ -38,10 +31,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Connect to xml
         setContentView(R.layout.activity_profile);
-
-        // Connect to in xml
-        btnLogout = findViewById(R.id.btnLogout);
-        btnSettings = findViewById(R.id.btnSettings);
 
         // Create Firebase instance and get user
         mFirebaseAuth = FirebaseAuth.getInstance();
