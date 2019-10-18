@@ -29,8 +29,8 @@ public class ProfileActivity extends AppCompatActivity {
         // Connect to xml
         setContentView(R.layout.activity_profile);
 
-
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = currentUser.getUid();
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference uidRef = rootRef.child("Users").child(uid);
@@ -43,10 +43,12 @@ public class ProfileActivity extends AppCompatActivity {
                 String mSkills = dataSnapshot.child("skills").getValue().toString();
                 Log.d("TAG", mUserName + " / " + mRole + " / " + mSkills);
 
+                TextView email = findViewById(R.id.tvEmailProfile);
                 TextView name = findViewById(R.id.tvNameProfile);
                 TextView role = findViewById(R.id.tvRoleProfile);
                 TextView skills = findViewById(R.id.tvSkillsProfile);
 
+                email.setText(currentUser.getEmail());
                 name.setText(mUserName);
                 role.setText(mRole);
                 skills.setText(mSkills);
