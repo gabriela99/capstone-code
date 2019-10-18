@@ -16,17 +16,17 @@
         android:layout_gravity="center"
         android:layout_marginTop="70dp"/>
 
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20sp"
-        android:layout_gravity="center"
-        android:hint="Email" />
+<!--    <TextView-->
+<!--        android:id="@+id/email"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="20sp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:hint="Email" />-->
 
 
     <TextView
-        android:id="@+id/etUserName"
+        android:id="@+id/tvNameProfile"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20sp"
@@ -34,7 +34,7 @@
         android:hint="Name" />
 
     <TextView
-        android:id="@+id/etRole"
+        android:id="@+id/tvRoleProfile"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Role"
@@ -42,7 +42,7 @@
         android:layout_marginBottom="20sp"/>
 
     <TextView
-        android:id="@+id/etSkills"
+        android:id="@+id/tvSkillsProfile"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Skills"

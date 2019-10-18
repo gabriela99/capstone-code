@@ -2,6 +2,7 @@ package com.example.capstone_code;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +40,7 @@ public class UserListActivity extends AppCompatActivity {
         });
     }
 
-    public void goToProfile() {
+    public void goToProfile(View view) {
         // Send user from user list to profile
         Intent intent = new Intent(UserListActivity.this, ProfileActivity.class);
         startActivity(intent);

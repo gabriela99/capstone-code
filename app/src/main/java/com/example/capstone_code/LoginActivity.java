@@ -53,49 +53,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
-
-//        btnSignIn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String email = emailId.getText().toString();
-//                String pwd = password.getText().toString();
-//                if(email.isEmpty()){
-//                    emailId.setError("Please enter email id");
-//                    emailId.requestFocus();
-//                }
-//                else  if(pwd.isEmpty()){
-//                    password.setError("Please enter your password");
-//                    password.requestFocus();
-//                }
-//                else  if(!(email.isEmpty() && pwd.isEmpty())){
-//                    mFirebaseAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            if(!task.isSuccessful()){
-//                                Toast.makeText(LoginActivity.this,"Login Error, Please Login Again",Toast.LENGTH_SHORT).show();
-//                            }
-//                            else{
-//                                Intent intToHome = new Intent(LoginActivity.this,UserListActivity.class);
-//                                startActivity(intToHome);
-//                            }
-//                        }
-//                    });
-//                }
-//                else{
-//                    Toast.makeText(LoginActivity.this,"Error Occurred!",Toast.LENGTH_SHORT).show();
-//
-//                }
-//
-//            }
-//        });
-
-//        tvSignUp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intSignUp = new Intent(LoginActivity.this, RegisterActivity.class);
-//                startActivity(intSignUp);
-//            }
-//        });
     }
 
     public void signIn(View view) {
