@@ -41,8 +41,8 @@ public class UserListActivity extends AppCompatActivity {
 
     public void goToProfile() {
         // Send user from user list to profile
-        Intent intToSettings = new Intent(UserListActivity.this, LoginActivity.class);
-        startActivity(intToSettings);
+        Intent intent = new Intent(UserListActivity.this, ProfileActivity.class);
+        startActivity(intent);
         return;
     }
 }

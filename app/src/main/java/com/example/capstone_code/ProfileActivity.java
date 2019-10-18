@@ -80,8 +80,8 @@ public class ProfileActivity extends AppCompatActivity {
         FirebaseAuth.getInstance();
 
         // Send user from profile to settings
-        Intent intToSettings = new Intent(ProfileActivity.this, SettingsActivity.class);
-        startActivity(intToSettings);
+        Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
+        startActivity(intent);
         return;
     }
 
@@ -90,9 +90,16 @@ public class ProfileActivity extends AppCompatActivity {
         mFirebaseAuth.signOut();
 
         // Send user from profile to login page
-        Intent intToMain = new Intent(ProfileActivity.this, LoginActivity.class);
-        startActivity(intToMain);
+        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+        startActivity(intent);
         finish();
+        return;
+    }
+
+    public void goToList(View view) {
+        // Send user from profile to user list page
+        Intent intent = new Intent(ProfileActivity.this, UserListActivity.class);
+        startActivity(intent);
         return;
     }
 }

@@ -64,5 +64,12 @@
         android:text="Logout"
         android:layout_gravity="center"
         android:onClick="logoutUser"/>
+    <Button
+        android:id="@+id/btnGoToList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User List"
+        android:layout_gravity="center"
+        android:onClick="goToList"/>
 
 </LinearLayout>
