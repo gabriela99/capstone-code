@@ -12,6 +12,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,7 +84,14 @@ public class SettingsActivity extends AppCompatActivity {
         confirmSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveUserInformation();
+                // Check if the inputs are valid before saving
+                boolean isInputValid = validateInput();
+                if (isInputValid) {
+                    saveUserInformation();
+                } else {
+                    // Show an error message if the inputs are not valid
+                    Toast.makeText(SettingsActivity.this,"Invalid Input! Please check that selected role and skills match the available options.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -152,6 +160,34 @@ public class SettingsActivity extends AppCompatActivity {
         //Set the adapter
         acTextViewRoles.setAdapter(adapterRoles);
     }
+
+    private boolean isStringInList(String[] listOptions, String userInput) {
+        boolean elementFound = false;
+        // Check an item is in an array https://www.geeksforgeeks.org/check-if-a-value-is-present-in-an-array-in-java/
+        for (String validItem : listOptions) {
+            if (userInput.equalsIgnoreCase(validItem)) {
+                elementFound = true;
+            }
+        }
+        return elementFound;
+    }
+
+    // Checks that user input conforms to the list of options: true if valid input, false if invalid
+    private boolean validateInput() {
+        // Retrieve what the user inputted into the fields
+        role = mRole.getText().toString();
+        skills = mSkills.getText().toString();
+        // Do the check for both fields
+        boolean isRoleValid = isStringInList(roleOptions, role);
+        boolean isSkillsValid = isStringInList(skillOptions, skills);
+        // If both role and skills are from the predefined list, return true for valid settings
+        if (isRoleValid && isSkillsValid) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     private void saveUserInformation() {
         name = mUserName.getText().toString();
