@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 @PowerMockRunnerDelegate(JUnit4.class)
 @PrepareForTest({ FirebaseDatabase.class})
 
-public class MainActivityTest {
+public class LoginActivityTest {
 
     private DatabaseReference mockedDatabaseReference;
 

@@ -90,7 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
         mFirebaseAuth.signOut();
 
         // Send user from profile to login page
-        Intent intToMain = new Intent(ProfileActivity.this, MainActivity.class);
+        Intent intToMain = new Intent(ProfileActivity.this, LoginActivity.class);
         startActivity(intToMain);
         finish();
         return;

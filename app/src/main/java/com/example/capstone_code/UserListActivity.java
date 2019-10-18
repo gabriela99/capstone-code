@@ -1,5 +1,6 @@
 package com.example.capstone_code;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,4 +38,12 @@ public class UserListActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void goToProfile() {
+        // Send user from user list to profile
+        Intent intToSettings = new Intent(UserListActivity.this, LoginActivity.class);
+        startActivity(intToSettings);
+        return;
+    }
 }
+

@@ -104,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void goToLogin(View view) {
-        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
         return;
     }
