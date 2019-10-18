@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Display information
         rowItems = new ArrayList<userDetails>();
-        arrayAdapter = new arrayAdapter(this, R.layout.activity_main, rowItems);
+        arrayAdapter = new arrayAdapter(this, R.layout.activity_login, rowItems);
         displayUserInfo();
     }
 
