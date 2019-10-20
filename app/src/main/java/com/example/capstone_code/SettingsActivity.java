@@ -152,13 +152,24 @@ public class SettingsActivity extends AppCompatActivity {
         ArrayAdapter<String> adapterRoles = new ArrayAdapter<>(this,android.R.layout.select_dialog_singlechoice, listOptions);
 
         //Find TextView control
-        AutoCompleteTextView acTextViewRoles = (AutoCompleteTextView) mField;
+        final AutoCompleteTextView acTextViewRoles = (AutoCompleteTextView) mField;
 
         //Set the number of characters the user must type before the drop down list is shown
-        acTextViewRoles.setThreshold(0);
+//        acTextViewRoles.setThreshold(0);
 
         //Set the adapter
         acTextViewRoles.setAdapter(adapterRoles);
+
+        // When the user first focuses on the field, show all options
+        acTextViewRoles.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View textView, boolean hasFocus) {
+                // If the view is focused, show the dropdown
+                if(hasFocus){
+                    acTextViewRoles.showDropDown();
+                }
+            }
+        });
     }
 
     private boolean isStringInList(String[] listOptions, String userInput) {

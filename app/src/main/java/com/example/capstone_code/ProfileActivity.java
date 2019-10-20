@@ -29,8 +29,8 @@ public class ProfileActivity extends AppCompatActivity {
         // Connect to xml
         setContentView(R.layout.activity_profile);
 
-        final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = currentUser.getUid();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = mUser.getUid();
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference uidRef = rootRef.child("Users").child(uid);
@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
                 TextView role = findViewById(R.id.tvRoleProfile);
                 TextView skills = findViewById(R.id.tvSkillsProfile);
 
-                email.setText(currentUser.getEmail());
+                email.setText(mUser.getEmail());
                 name.setText(mUserName);
                 role.setText(mRole);
                 skills.setText(mSkills);
@@ -76,6 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void logoutUser(View view) {
         // Sign user out
+
         mFirebaseAuth.signOut();
 
         // Send user from profile to login page
