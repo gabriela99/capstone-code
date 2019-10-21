@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -166,6 +167,27 @@ public class SettingsActivity extends AppCompatActivity {
             public void onFocusChange(View textView, boolean hasFocus) {
                 // If the view is focused, show the dropdown
                 if(hasFocus){
+                    acTextViewRoles.showDropDown();
+                }
+            }
+        });
+
+        // When the user deletes a character, the options list is shown again if
+        // it matches an option(s) in the list or if there is no longer any
+        // characters in the field
+        acTextViewRoles.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged (android.text.Editable s) {
+                // After the text is done changing, check the value of the text view
+                // If the length of the string equals 0 (so an empty input), call
+                // again the showDropdown() function
+                if(acTextViewRoles.getText().toString() == ""){
                     acTextViewRoles.showDropDown();
                 }
             }
