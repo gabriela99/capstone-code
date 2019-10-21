@@ -155,7 +155,7 @@ public class SettingsActivity extends AppCompatActivity {
         final AutoCompleteTextView acTextViewRoles = (AutoCompleteTextView) mField;
 
         //Set the number of characters the user must type before the drop down list is shown
-//        acTextViewRoles.setThreshold(0);
+        acTextViewRoles.setThreshold(0);
 
         //Set the adapter
         acTextViewRoles.setAdapter(adapterRoles);
