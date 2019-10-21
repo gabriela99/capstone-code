@@ -16,9 +16,6 @@ There are multiple ways to run an Android application. The following are 3 diffe
 * [Install](https://www.genymotion.com/#!/download) and [Create/Configure](https://www.genymotion.com/#!/developers/user-guide) GenyMotion emulator
 * [Configure an Android device](http://developer.android.com/tools/device.html)
 
-#### Fork the application in Github
-* [Fork](https://guides.github.com/activities/forking/) the [Alfresco Android project](https://github.com/Alfresco/alfresco-android-app/fork) on GitHub 
-
 #### Import the project into Android Studio
 * Repository URL : **git@github.com:gabriela99/capstone-code.git**
 * Clone and change directory to capstone-code
