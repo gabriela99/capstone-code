@@ -40,11 +40,14 @@ public class UserListActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Triggered when the user clicks on the "profile" button (id/btnGoToProfile)
+     * Redirects the user from the user list page to the profile page of the active user
+     * @param view the View it is associated with the goToProfile button
+     */
     public void goToProfile(View view) {
-        // Send user from user list to profile
         Intent intent = new Intent(UserListActivity.this, ProfileActivity.class);
         startActivity(intent);
-        return;
     }
 }
 
