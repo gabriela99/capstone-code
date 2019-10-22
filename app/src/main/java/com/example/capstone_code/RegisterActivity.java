@@ -87,7 +87,9 @@ public class RegisterActivity extends AppCompatActivity {
                         DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
                         Map userInfo = new HashMap<>();
                         userInfo.put("name", name);
-                        userInfo.put("profileImageUrl", "default");
+//                        userInfo.put("profileImageUrl", "default");
+                        userInfo.put("role", "Role");
+                        userInfo.put("skills", "Skills");
                         currentUserDb.updateChildren(userInfo);
                     }
                     else {

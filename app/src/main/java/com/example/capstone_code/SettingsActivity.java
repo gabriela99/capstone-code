@@ -187,7 +187,7 @@ public class SettingsActivity extends AppCompatActivity {
                 // After the text is done changing, check the value of the text view
                 // If the length of the string equals 0 (so an empty input), call
                 // again the showDropdown() function
-                if(acTextViewRoles.getText().toString() == ""){
+                if(acTextViewRoles.getText().toString().equals("")){
                     acTextViewRoles.showDropDown();
                 }
             }

@@ -18,6 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ *
+ */
 public class ProfileActivity extends AppCompatActivity {
     FirebaseAuth mFirebaseAuth;
     FirebaseUser mUser;
@@ -41,6 +44,9 @@ public class ProfileActivity extends AppCompatActivity {
          * @param dataSnapshot snapshot of current user information
          */
         ValueEventListener valueEventListener = new ValueEventListener() {
+
+
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Fetch information from Firebase for the user with the data snapshot
@@ -95,11 +101,22 @@ public class ProfileActivity extends AppCompatActivity {
      */
     public void logoutUser(View view) {
         // Sign user out
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
         mFirebaseAuth.signOut();
 
         // Send user from profile to login page
         Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
         startActivity(intent);
+
+//        try {
+//            Object o = null;
+//            Log.e("TEST", "causing an error on purpose");
+//            o.equals(null);
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//            Log.e("TEST","error",e);
+//        }
         finish();
     }
 
