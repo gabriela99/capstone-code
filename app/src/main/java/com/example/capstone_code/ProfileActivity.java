@@ -69,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         };
-        uidRef.addListenerForSingleValueEvent(valueEventListener);
+        uidRef.addValueEventListener(valueEventListener);
     }
 
 
