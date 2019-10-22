@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextWatcher;
 import android.view.View;
@@ -187,8 +188,16 @@ public class SettingsActivity extends AppCompatActivity {
                 // After the text is done changing, check the value of the text view
                 // If the length of the string equals 0 (so an empty input), call
                 // again the showDropdown() function
-                if(acTextViewRoles.getText().toString().equals("")){
-                    acTextViewRoles.showDropDown();
+                if (acTextViewRoles.getText().toString().length() == 0) {
+                    // Handler to run after delay https://developer.android.com/reference/android/os/Handler
+                    final Handler handler = new Handler();
+                    // Waits 100 milliseconds before executing showDropDown()
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            acTextViewRoles.showDropDown();
+                        }
+                    }, 100);
                 }
             }
         });
