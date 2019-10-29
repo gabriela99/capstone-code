@@ -1,4 +1,4 @@
-package com.example.capstone_code;
+package com.example.capstone_code.viewmodel;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.capstone_code.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -74,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this,"Login Error, Please Login Again",Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Intent intToHome = new Intent(LoginActivity.this,UserListActivity.class);
+                        Intent intToHome = new Intent(LoginActivity.this, UserListActivity.class);
                         startActivity(intToHome);
                     }
                 }

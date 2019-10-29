@@ -1,4 +1,4 @@
-package com.example.capstone_code;
+package com.example.capstone_code.viewmodel;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,11 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.capstone_code.FirebaseDatabaseHelper;
+import com.example.capstone_code.R;
+import com.example.capstone_code.RecyclerView_Config;
+import com.example.capstone_code.model.User;
 
 import java.util.List;
 

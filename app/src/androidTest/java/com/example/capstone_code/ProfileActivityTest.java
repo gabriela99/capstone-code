@@ -3,6 +3,8 @@ package com.example.capstone_code;
 import androidx.test.espresso.Espresso;
 import androidx.test.rule.ActivityTestRule;
 
+import com.example.capstone_code.viewmodel.ProfileActivity;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

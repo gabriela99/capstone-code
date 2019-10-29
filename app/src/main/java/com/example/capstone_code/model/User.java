@@ -1,4 +1,4 @@
-package com.example.capstone_code;
+package com.example.capstone_code.model;
 
 public class User {
     private String name;

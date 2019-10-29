@@ -2,6 +2,7 @@ package com.example.capstone_code;
 
 import androidx.annotation.NonNull;
 
+import com.example.capstone_code.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
