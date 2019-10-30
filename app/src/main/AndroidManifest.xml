@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cardview.ColleagueCardActivity"></activity>
         <activity android:name=".SearchActivity" />
         <activity android:name=".viewmodel.UserListActivity" />
         <activity android:name=".viewmodel.SettingsActivity" />
