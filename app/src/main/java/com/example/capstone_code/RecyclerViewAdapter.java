@@ -1,6 +1,7 @@
 package com.example.capstone_code;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.capstone_code.viewmodel.ColleagueProfileActivity;
 
 import java.util.ArrayList;
 
@@ -51,11 +53,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.colleagueName.setText(mColleagueNames.get(position));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            /**
+             * When item in recycler view clicked, go to page of colleague
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mColleagueNames.get(position));
 
                 Toast.makeText(mContext, mColleagueNames.get(position), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(mContext, ColleagueProfileActivity.class);
+                intent.putExtra("image_url", mImages.get(position));
+                intent.putExtra("colleague_name", mColleagueNames.get(position));
+                mContext.startActivity(intent);
             }
         });
     }
