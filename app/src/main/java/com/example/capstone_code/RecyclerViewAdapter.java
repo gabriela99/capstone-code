@@ -25,7 +25,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<String> mImages = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerViewAdapter(ArrayList<String> mColleagueNames, ArrayList<String> mImages, Context mContext) {
+    public RecyclerViewAdapter(Context mContext, ArrayList<String> mColleagueNames, ArrayList<String> mImages) {
         this.mColleagueNames = mColleagueNames;
         this.mImages = mImages;
         this.mContext = mContext;
@@ -59,6 +59,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         });
     }
+
+    /**
+     * Tells list adapter how many names are in the list
+     */
 
     @Override
     public int getItemCount() {
