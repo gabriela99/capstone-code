@@ -1,12 +1,20 @@
 package com.example.capstone_code;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.capstone_code.viewmodel.LoginActivity;
+import com.example.capstone_code.viewmodel.ProfileActivity;
 
 import java.util.ArrayList;
 
@@ -32,6 +40,29 @@ public class MainActivity extends AppCompatActivity {
 
         initImageBitmap();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.profile_icon:
+                Intent intent = new Intent(this, ProfileActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.logout_icon:
+                Intent intent_logout = new Intent(this, LoginActivity.class);
+                startActivity(intent_logout);
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initImageBitmap(){
