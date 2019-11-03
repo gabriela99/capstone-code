@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstone_code.viewmodel.LoginActivity;
 import com.example.capstone_code.viewmodel.ProfileActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.logout_icon:
+                FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+                mFirebaseAuth.signOut();
                 Intent intent_logout = new Intent(this, LoginActivity.class);
                 startActivity(intent_logout);
                 return true;
