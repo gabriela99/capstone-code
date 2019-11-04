@@ -31,16 +31,24 @@ public class ColleagueProfileActivity extends AppCompatActivity {
 
 //            String imageUrl =  getIntent().getStringExtra("image_url");
             String colleagueName = getIntent().getStringExtra("colleague_name");
+            String colleagueRole = getIntent().getStringExtra("colleague_role");
+            String colleagueSkills = getIntent().getStringExtra("colleague_skills");
 
-            setImage(colleagueName);
+
+            setInfo(colleagueName, colleagueRole, colleagueSkills);
         }
     }
 
-    private void setImage(String colleagueName) {
+    private void setInfo(String colleagueName, String colleagueRole, String colleagueSkills) {
         Log.d(TAG, "setImage: setting the image and name to widgets.");
 
         TextView name = findViewById(R.id.tvNameColleague);
+        TextView role = findViewById(R.id.tvRoleColleague);
+        TextView skills = findViewById(R.id.tvSkillsColleague);
+
         name.setText(colleagueName);
+        role.setText(colleagueRole);
+        skills.setText(colleagueSkills);
 
 //        ImageView image = findViewById(R.id.ivProfileColleague);
 

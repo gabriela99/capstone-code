@@ -104,6 +104,9 @@ public class RecyclerView_Config {
 
                     Intent intent = new Intent(mContext, ColleagueProfileActivity.class);
                     intent.putExtra("colleague_name", mUserList.get(position).getName());
+                    intent.putExtra("colleague_role", mUserList.get(position).getRole());
+                    intent.putExtra("colleague_skills", mUserList.get(position).getSkills());
+
                     mContext.startActivity(intent);
                 }
             });
