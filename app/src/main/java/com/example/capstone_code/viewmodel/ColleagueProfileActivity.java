@@ -21,7 +21,7 @@ public class ColleagueProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_colleague_profile);
         Log.d(TAG, "onCreate: started");
 
-        getIncomingIntent();
+//        getIncomingIntent();
     }
 
     private void getIncomingIntent() {

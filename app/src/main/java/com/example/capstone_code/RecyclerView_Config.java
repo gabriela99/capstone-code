@@ -1,7 +1,10 @@
 package com.example.capstone_code;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -11,11 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstone_code.model.User;
+import com.example.capstone_code.viewmodel.ColleagueProfileActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecyclerView_Config {
     private Context mContext;
@@ -46,6 +52,8 @@ public class RecyclerView_Config {
             mName = itemView.findViewById(R.id.tvName);
             mRole = itemView.findViewById(R.id.tvRole);
             mSkills = itemView.findViewById(R.id.tvSkills);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
+
         }
 
         public void bind(User user, String key) {
@@ -84,6 +92,20 @@ public class RecyclerView_Config {
 
 
             holder.bind(mUserList.get(position), mKeys.get(position));
+
+            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * When item in recycler view clicked, go to page of colleague
+                 * @param view
+                 */
+                @Override
+                public void onClick(View view) {
+                    Log.d(TAG, "onClick: clicked on: " + mUserList.get(position));
+
+                    Intent intent = new Intent(mContext, ColleagueProfileActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
         /**
