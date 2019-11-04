@@ -71,14 +71,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         });
     }
 
-    /**
-     * Tells list adapter how many names are in the list
-     */
-
-    @Override
-    public int getItemCount() {
-        return mColleagueNames.size();
-    }
 
     /**
      * Holds memory of each individual image in recycler
@@ -95,5 +87,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             colleagueName = itemView.findViewById(R.id.tvColleagueName);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
+    }
+
+    /**
+     * Tells list adapter how many names are in the list
+     */
+    @Override
+    public int getItemCount() {
+        return mColleagueNames.size();
     }
 }

@@ -3,6 +3,7 @@ package com.example.capstone_code;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstone_code.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerView_Config {
     private Context mContext;
@@ -23,16 +27,22 @@ public class RecyclerView_Config {
         recyclerView.setAdapter(mUsersAdapter);
     }
 
+
     class UserItemView extends RecyclerView.ViewHolder {
         private TextView mName;
         private TextView mRole;
         private TextView mSkills;
         private String key;
+        private RelativeLayout parentLayout;
+        CircleImageView image;
+
+
 
         public UserItemView(ViewGroup parent) {
             super(LayoutInflater.from(mContext).
                     inflate(R.layout.user_list_item, parent, false));
 
+            image = itemView.findViewById(R.id.ivImage);
             mName = itemView.findViewById(R.id.tvName);
             mRole = itemView.findViewById(R.id.tvRole);
             mSkills = itemView.findViewById(R.id.tvSkills);
@@ -48,12 +58,17 @@ public class RecyclerView_Config {
     class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
         private List<User> mUserList;
         private List<String> mKeys;
+        private ArrayList<String> mImages = new ArrayList<>();
+
 
         public UsersAdapter(List<User> mUserList, List<String> mKeys) {
             this.mUserList = mUserList;
             this.mKeys = mKeys;
         }
 
+        /**
+         * Holds memory of each individual image in recycler
+         */
         @NonNull
         @Override
         public UserItemView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -61,10 +76,19 @@ public class RecyclerView_Config {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull UserItemView holder, int position) {
+        public void onBindViewHolder(@NonNull UserItemView holder, final int position) {
+//            Glide.with(mContext)
+//                    .asBitmap()
+//                    .load(mImages.get(position))
+//                    .into(holder.image);
+
+
             holder.bind(mUserList.get(position), mKeys.get(position));
         }
 
+        /**
+         * Tells list adapter how many names are in the list
+         */
         @Override
         public int getItemCount() {
             return mUserList.size();
