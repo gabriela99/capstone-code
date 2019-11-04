@@ -103,6 +103,7 @@ public class RecyclerView_Config {
                     Log.d(TAG, "onClick: clicked on: " + mUserList.get(position));
 
                     Intent intent = new Intent(mContext, ColleagueProfileActivity.class);
+                    intent.putExtra("colleague_name", mUserList.get(position).getName());
                     mContext.startActivity(intent);
                 }
             });
