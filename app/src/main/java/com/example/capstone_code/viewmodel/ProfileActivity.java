@@ -26,6 +26,10 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseAuth mFirebaseAuth;
     FirebaseUser mUser;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,21 +43,27 @@ public class ProfileActivity extends AppCompatActivity {
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference uidRef = rootRef.child("Users").child(uid);
 
-        /**
-         * Display the users email, name, role and skills by fetching information
-         * from Firebase and connecting to the XML by finding each field by their id's
-         * @param dataSnapshot snapshot of current user information
-         */
+
         ValueEventListener valueEventListener = new ValueEventListener() {
 
-
-
+            /**
+             * Display the users email, name, role and skills by fetching information
+             * from Firebase and connecting to the XML by finding each field by their id's
+             * @param dataSnapshot snapshot of current user information
+             */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Fetch information from Firebase for the user with the data snapshot
-                String mUserName = dataSnapshot.child("name").getValue().toString();
-                String mRole = dataSnapshot.child("role").getValue().toString();
-                String mSkills = dataSnapshot.child("skills").getValue().toString();
+                Object dbUserName = dataSnapshot.child("name").getValue();
+                Object dbRole = dataSnapshot.child("role").getValue();
+                Object dbSkills = dataSnapshot.child("skills").getValue();
+
+                // Ensure the user data is not null, if it is then have an empty string
+                String mUserName = dbUserName != null ? dbUserName.toString() : "";
+                String mRole = dbRole != null ? dbRole.toString() : "";
+                String mSkills = dbSkills != null ? dbSkills.toString() : "";
+
+                // Test to see if working
                 Log.d("TAG", mUserName + " / " + mRole + " / " + mSkills);
 
                 // Connect to XML by finding each id
@@ -70,6 +80,10 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
 
+            /**
+             * If there is a firebase error, then return a pop up error message
+             * @param databaseError value listener returns an error
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();

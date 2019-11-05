@@ -1,4 +1,4 @@
-package com.example.capstone_code;
+package com.example.capstone_code.utils;
 
 import androidx.annotation.NonNull;
 

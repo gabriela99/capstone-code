@@ -1,8 +1,10 @@
-package com.example.capstone_code;
+package com.example.capstone_code.viewmodel;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.example.capstone_code.R;
 
 public class SearchActivity extends AppCompatActivity {
 

@@ -9,12 +9,13 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.capstone_code.FirebaseDatabaseHelper;
 import com.example.capstone_code.R;
-import com.example.capstone_code.RecyclerView_Config;
 import com.example.capstone_code.model.User;
+import com.example.capstone_code.utils.FirebaseDatabaseHelper;
+import com.example.capstone_code.view.UsersAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -37,7 +38,9 @@ public class UserListActivity extends AppCompatActivity {
         new FirebaseDatabaseHelper().readUsers(new FirebaseDatabaseHelper.DataStatus() {
             @Override
             public void DataIsLoaded(List<User> users, List<String> keys) {
-                new RecyclerView_Config().setConfig(mRecyclerView, UserListActivity.this, users, keys);
+                UsersAdapter mUsersAdapter = new UsersAdapter(users, keys);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(UserListActivity.this));
+                mRecyclerView.setAdapter(mUsersAdapter);
             }
 
             @Override

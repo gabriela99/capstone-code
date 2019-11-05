@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".viewmodel.SearchActivity" />
         <activity android:name=".viewmodel.UserListActivity" />
         <activity android:name=".viewmodel.SettingsActivity" />
         <activity android:name=".viewmodel.RegisterActivity" />
