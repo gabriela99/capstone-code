@@ -52,7 +52,10 @@ public class SettingsActivity extends AppCompatActivity {
     String[] skillOptions = { "Design thinking", "Agile", "Interpersonal skills", "Java" };
 
 
-
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,8 +113,15 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     */
     private void getUserInfo() {
         mCustomerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            /**
+             *
+             * @param dataSnapshot
+             */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0) {
@@ -143,6 +153,10 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
 
+            /**
+             *
+             * @param databaseError
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -150,6 +164,11 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     *
+     * @param listOptions
+     * @param mField
+     */
     private void autoCompleteText(String[] listOptions, EditText mField) {
         //Create the instance of ArrayAdapter containing list of roles
         ArrayAdapter<String> adapterRoles = new ArrayAdapter<>(this,android.R.layout.select_dialog_singlechoice, listOptions);
@@ -165,6 +184,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         // When the user first focuses on the field, show all options
         acTextViewRoles.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            /**
+             *
+             * @param textView
+             * @param hasFocus
+             */
             @Override
             public void onFocusChange(View textView, boolean hasFocus) {
                 // If the view is focused, show the dropdown
@@ -178,12 +202,33 @@ public class SettingsActivity extends AppCompatActivity {
         // it matches an option(s) in the list or if there is no longer any
         // characters in the field
         acTextViewRoles.addTextChangedListener(new TextWatcher() {
+
+            /**
+             *
+             * @param s
+             * @param start
+             * @param count
+             * @param after
+             */
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
+            /**
+             *
+             * @param s
+             * @param start
+             * @param before
+             * @param count
+             */
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
+            /**
+             *
+             * @param s
+             */
             @Override
             public void afterTextChanged (android.text.Editable s) {
                 // After the text is done changing, check the value of the text view
@@ -204,6 +249,12 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     *
+     * @param listOptions
+     * @param userInput
+     * @return
+     */
     private boolean isStringInList(String[] listOptions, String userInput) {
         boolean elementFound = false;
         // Check an item is in an array https://www.geeksforgeeks.org/check-if-a-value-is-present-in-an-array-in-java/
@@ -215,14 +266,17 @@ public class SettingsActivity extends AppCompatActivity {
         return elementFound;
     }
 
-    // Checks that user input conforms to the list of options: true if valid input, false if invalid
+    /**
+     * Checks that user input conforms to the list of options or is empty
+     * @return  true if valid input (item from role or skill list or empty), false if invalid
+     */
     private boolean validateInput() {
-        // Retrieve what the user inputted into the fields
-        role = mRole.getText().toString();
-        skills = mSkills.getText().toString();
-        // Do the check for both fields
-        boolean isRoleValid = isStringInList(roleOptions, role);
-        boolean isSkillsValid = isStringInList(skillOptions, skills);
+        // Retrieve what the user inputted into the fields and trim to remove whitespace
+        role = mRole.getText().toString().trim();
+        skills = mSkills.getText().toString().trim();
+        // Do the check for both fields if role or skill in list or not yet filled
+        boolean isRoleValid = isStringInList(roleOptions, role) || role.equals("");
+        boolean isSkillsValid = isStringInList(skillOptions, skills) || skills.equals("");
         // If both role and skills are from the predefined list, return true for valid settings
         if (isRoleValid && isSkillsValid) {
             return true;
@@ -231,7 +285,9 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     *
+     */
     private void saveUserInformation() {
         name = mUserName.getText().toString();
         role = mRole.getText().toString();
@@ -281,6 +337,12 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
