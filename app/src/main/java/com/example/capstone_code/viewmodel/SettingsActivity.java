@@ -272,13 +272,15 @@ public class SettingsActivity extends AppCompatActivity {
      */
     private boolean validateInput() {
         // Retrieve what the user inputted into the fields and trim to remove whitespace
+        name = mUserName.getText().toString().trim();
         role = mRole.getText().toString().trim();
         skills = mSkills.getText().toString().trim();
         // Do the check for both fields if role or skill in list or not yet filled
+        boolean isNameValid = name.length() >= 1;
         boolean isRoleValid = isStringInList(roleOptions, role) || role.equals("");
         boolean isSkillsValid = isStringInList(skillOptions, skills) || skills.equals("");
         // If both role and skills are from the predefined list, return true for valid settings
-        if (isRoleValid && isSkillsValid) {
+        if (isNameValid && isRoleValid && isSkillsValid) {
             return true;
         } else {
             return false;

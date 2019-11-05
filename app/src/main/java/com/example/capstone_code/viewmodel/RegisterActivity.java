@@ -89,8 +89,8 @@ public class RegisterActivity extends AppCompatActivity {
                         Map userInfo = new HashMap<>();
                         userInfo.put("name", name);
 //                        userInfo.put("profileImageUrl", "default");
-                        userInfo.put("role", "Role");
-                        userInfo.put("skills", "Skills");
+                        userInfo.put("role", "");
+                        userInfo.put("skills", "");
                         currentUserDb.updateChildren(userInfo);
                     }
                     else {
