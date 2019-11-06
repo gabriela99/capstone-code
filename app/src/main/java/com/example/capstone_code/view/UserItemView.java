@@ -12,6 +12,10 @@ import com.example.capstone_code.model.User;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Gets the user information from the model
+ * and applies it to the corresponding XML fields
+ */
 class UserItemView extends RecyclerView.ViewHolder {
     private TextView mName;
     private TextView mRole;
@@ -24,6 +28,10 @@ class UserItemView extends RecyclerView.ViewHolder {
         return parentLayout;
     }
 
+    /**
+     * Finds the relevant fields from the XML
+     * @param parent
+     */
     public UserItemView(ViewGroup parent) {
         super(LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.user_list_item, parent, false));
@@ -36,6 +44,12 @@ class UserItemView extends RecyclerView.ViewHolder {
 
     }
 
+    /**
+     * Gets the name, role, and skills of a user within the User array
+     * Applies name, role, and skills to their corresponding XML field with set text
+     * @param user
+     * @param key
+     */
     public void bind(User user, String key) {
         mName.setText(user.getName());
         mRole.setText(user.getRole());

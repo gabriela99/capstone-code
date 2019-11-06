@@ -28,7 +28,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
     }
 
     /**
-     * Holds memory of each individual image in recycler
+     * Holds memory of each individual user in recycler
      */
     @NonNull
     @Override

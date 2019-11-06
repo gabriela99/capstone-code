@@ -24,13 +24,25 @@ public class FirebaseDatabaseHelper {
         void DataIsDeleted();
     }
 
+    /**
+     * Instantiates Firebase and points to Users collection
+     */
     public FirebaseDatabaseHelper() {
         mDatabase = FirebaseDatabase.getInstance();
         mReferenceUsers = mDatabase.getReference("Users");
     }
 
+    /**
+     *
+     * @param dataStatus
+     */
     public void readUsers(final DataStatus dataStatus) {
         mReferenceUsers.addValueEventListener(new ValueEventListener() {
+
+            /**
+             *
+             * @param dataSnapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                users.clear();
@@ -43,6 +55,10 @@ public class FirebaseDatabaseHelper {
                dataStatus.DataIsLoaded(users, keys);
             }
 
+            /**
+             * If there is a Firebase error, then return a pop up error message
+             * @param databaseError value listener returns an error
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -50,3 +66,5 @@ public class FirebaseDatabaseHelper {
         });
     }
 }
+
+

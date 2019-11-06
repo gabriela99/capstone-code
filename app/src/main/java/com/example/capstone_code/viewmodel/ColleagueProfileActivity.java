@@ -13,6 +13,10 @@ public class ColleagueProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "ColleagueProfileActivit";
 
+    /**
+     * Takes current state and applies corresponding XML
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,11 +26,16 @@ public class ColleagueProfileActivity extends AppCompatActivity {
         getIncomingIntent();
     }
 
+    /**
+     *
+     */
     private void getIncomingIntent() {
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
 
         // Ensure the intent has extras to prevent app from crashing if it does not
-        if(getIntent().hasExtra("colleague_name")){
+        if(getIntent().hasExtra("colleague_name")
+                && getIntent().hasExtra("colleague_role")
+                && getIntent().hasExtra("colleague_skills")){
             Log.d(TAG, "getIncomingIntent: found intent extras.");
 
 //            String imageUrl =  getIntent().getStringExtra("image_url");
@@ -39,6 +48,12 @@ public class ColleagueProfileActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param colleagueName
+     * @param colleagueRole
+     * @param colleagueSkills
+     */
     private void setInfo(String colleagueName, String colleagueRole, String colleagueSkills) {
         Log.d(TAG, "setImage: setting the image and name to widgets.");
 
