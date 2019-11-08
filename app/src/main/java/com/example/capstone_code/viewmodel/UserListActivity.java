@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,9 +19,10 @@ import com.example.capstone_code.utils.FirebaseDatabaseHelper;
 import com.example.capstone_code.view.UsersAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class UserListActivity extends AppCompatActivity {
+public class UserListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private RecyclerView mRecyclerView;
     private Toolbar toolbar;
@@ -64,6 +66,9 @@ public class UserListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
         return true;
     }
 
@@ -80,9 +85,29 @@ public class UserListActivity extends AppCompatActivity {
                 Intent intent_logout = new Intent(this, LoginActivity.class);
                 startActivity(intent_logout);
                 return true;
-
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String userInput = newText.toLowerCase();
+        List<User> newList = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
+
+        for (User colleague : userList) {
+            if(colleague.toString().toLowerCase().contains(userInput)) {
+                newList.add(colleague);
+            }
+        }
+//        UsersAdapter.updateColleagueList(newList);
+
+        return true;
     }
 }
 

@@ -72,4 +72,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
     public int getItemCount() {
         return mUserList.size();
     }
+
+    public void updateColleagueList(List<User> newList) {
+        mUserList = new ArrayList<>();
+        mUserList.addAll(newList);
+        notifyDataSetChanged();
+    }
 }
