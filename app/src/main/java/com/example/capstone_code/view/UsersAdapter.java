@@ -27,6 +27,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
         this.mKeys = mKeys;
     }
 
+    public List<User> getmUserList() {
+        return mUserList;
+    }
+
     /**
      * Holds memory of each individual user in recycler
      */
@@ -77,5 +81,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
         mUserList = new ArrayList<>();
         mUserList.addAll(newList);
         notifyDataSetChanged();
+
+        Log.d(TAG, "updateColleagueList");
+
     }
 }

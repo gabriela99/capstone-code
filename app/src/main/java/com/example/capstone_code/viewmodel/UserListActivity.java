@@ -62,6 +62,11 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
         });
     }
 
+    /**
+     * Fill the toolbar with the menu from the XML file and the search view
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -72,6 +77,12 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
         return true;
     }
 
+    /**
+     * When profile is selected, user sent to profile
+     * When logout is selected, user is logged out
+     * @param item selected field from menu list
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -99,13 +110,19 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
         String userInput = newText.toLowerCase();
         List<User> newList = new ArrayList<>();
         List<User> userList = new ArrayList<>();
+        List<String> key = new ArrayList<>();
 
+        // Loop through all the colleagues
         for (User colleague : userList) {
-            if(colleague.toString().toLowerCase().contains(userInput)) {
+            // if the colleagues name contains the queried text, add it to the results
+            if(colleague.getName().toLowerCase().contains(userInput)) {
                 newList.add(colleague);
             }
         }
-//        UsersAdapter.updateColleagueList(newList);
+
+        UsersAdapter usersAdapter = new UsersAdapter(userList, key);
+        usersAdapter.updateColleagueList(newList);
+
 
         return true;
     }
