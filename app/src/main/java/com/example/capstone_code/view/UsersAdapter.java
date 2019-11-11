@@ -1,5 +1,6 @@
 package com.example.capstone_code.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -20,11 +21,17 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
     private List<User> mUserList;
     private List<String> mKeys;
     private ArrayList<String> mImages = new ArrayList<>();
+    private Context mContext;
 
 
     public UsersAdapter(List<User> mUserList, List<String> mKeys) {
         this.mUserList = mUserList;
         this.mKeys = mKeys;
+    }
+
+    public UsersAdapter(Context mContext, List<User> mUserList) {
+        this.mContext = mContext;
+        this.mUserList = mUserList;
     }
 
     public List<User> getmUserList() {
@@ -77,9 +84,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
         return mUserList.size();
     }
 
-    public void updateColleagueList(List<User> newList) {
-        mUserList = new ArrayList<>();
-        mUserList.addAll(newList);
+    public void updateColleagueList(List<User> mUserList) {
+//        mUserList = new ArrayList<>();
+//        mUserList.addAll(newList);
+
+        this.mUserList = mUserList;
         notifyDataSetChanged();
 
         Log.d(TAG, "updateColleagueList");

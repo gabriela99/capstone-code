@@ -100,30 +100,39 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * For use when query is to be made only after clicking on the search button
+     * @param query entire query input from user
+     * @return false since onQueryTextChange is used
+     */
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
 
+    /**
+     * For use when query is to be made with each character typed
+     * @param newText each new character input from user
+     * @return true
+     */
     @Override
     public boolean onQueryTextChange(String newText) {
         String userInput = newText.toLowerCase();
         List<User> newList = new ArrayList<>();
-        List<User> userList = new ArrayList<>();
-        List<String> key = new ArrayList<>();
+        List<User> colleagues = new ArrayList<>();
 
         // Loop through all the colleagues
-        for (User colleague : userList) {
+        for (User colleague : colleagues) {
             // if the colleagues name contains the queried text, add it to the results
             if(colleague.getName().toLowerCase().contains(userInput)) {
                 newList.add(colleague);
             }
         }
 
-        UsersAdapter usersAdapter = new UsersAdapter(userList, key);
+        UsersAdapter usersAdapter = new UsersAdapter(this, colleagues);
         usersAdapter.updateColleagueList(newList);
 
-
+        // Tells searchview to handle onQueryTextChange instead of onQueryTextSubmit
         return true;
     }
 }
