@@ -120,39 +120,41 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
      * @return true
      */
     @Override
-    public boolean onQueryTextChange(final String newText) {
+    public boolean onQueryTextChange(String newText) {
+
         Log.d(TAG, newText);
+        final String userInput = newText.toLowerCase();
 
         new FirebaseDatabaseHelper().readUsers(new FirebaseDatabaseHelper.DataStatus() {
 
             @Override
             public void DataIsLoaded(List<User> colleagues, List<String> keys) {
-                String userInput = newText.toLowerCase();
-                List<User> newList = new ArrayList<>();
+
+                // Instantiation of UsersAdapter to use updateColleagueList
                 UsersAdapter usersAdapter = new UsersAdapter(colleagues, keys);
 
-                colleagues = usersAdapter.getmUserList();
-                Log.d(TAG, colleagues.toString());
+                // Instantiation of empty array list
+                List<User> newList = new ArrayList<>();
 
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(UserListActivity.this));
-                mRecyclerView.setAdapter(usersAdapter);
+                // Fill the user list from the users adapter
+                colleagues = usersAdapter.getmUserList();
+
+                Log.d(TAG, colleagues.toString());
 
                 // Loop through all the colleagues
                 for (User colleague : colleagues) {
-                    Log.d(TAG, colleague.toString());
+                    Log.d(TAG, colleague.getName());
                     // if the colleagues name contains the queried text, add it to the results
                     if(colleague.getName().toLowerCase().contains(userInput)) {
                         newList.add(colleague);
+                        Log.d(TAG, newList.toString());
                     }
                 }
 
-                // Instantiate the usersAdapter to make use of updateColleagueList function
-//        UsersAdapter usersAdapter = new UsersAdapter(this, colleagues);
+                // Renew the recycler view with filtered list
                 usersAdapter.updateColleagueList(newList);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(UserListActivity.this));
                 mRecyclerView.setAdapter(usersAdapter);
-
-                // Tells searchview to handle onQueryTextChange instead of onQueryTextSubmit
             }
 
             @Override
