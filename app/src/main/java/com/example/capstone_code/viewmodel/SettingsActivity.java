@@ -86,31 +86,6 @@ public class SettingsActivity extends AppCompatActivity {
         // Allow the user to type in a character and have autocomplete options provided from the options lists
         autoCompleteText(roleOptions, mRole);
         autoCompleteText(skillOptions, mSkills);
-
-        confirmSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Check if the inputs are valid before saving
-                boolean isInputValid = validateInput();
-                if (isInputValid) {
-                    saveUserInformation();
-                } else {
-                    // Show an error message if the inputs are not valid
-                    Toast.makeText(SettingsActivity.this,"Invalid Input! Please check that selected role and skills match the available options.",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        backToProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SettingsActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
     }
 
     /**
@@ -353,5 +328,20 @@ public class SettingsActivity extends AppCompatActivity {
             resultUri = imageUri;
             mProfileImage.setImageURI(resultUri);
         }
+    }
+
+    public void saveSettings(View view) {
+        boolean isInputValid = validateInput();
+        if (isInputValid) {
+            saveUserInformation();
+        } else {
+            // Show an error message if the inputs are not valid
+            Toast.makeText(SettingsActivity.this,"Invalid Input! Please check that selected role and skills match the available options.",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void backToProfile(View view) {
+        Intent intent = new Intent(SettingsActivity.this, ProfileActivity.class);
+        startActivity(intent);
     }
 }
