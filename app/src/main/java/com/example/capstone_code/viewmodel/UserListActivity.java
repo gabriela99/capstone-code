@@ -47,11 +47,6 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(UserListActivity.this));
                 mRecyclerView.setAdapter(mUsersAdapter);
 
-
-
-
-
-
             }
 
             @Override
@@ -131,17 +126,16 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
         new FirebaseDatabaseHelper().readUsers(new FirebaseDatabaseHelper.DataStatus() {
 
             @Override
-            public void DataIsLoaded(List<User> users, List<String> keys) {
+            public void DataIsLoaded(List<User> colleagues, List<String> keys) {
                 String userInput = newText.toLowerCase();
                 List<User> newList = new ArrayList<>();
-                List<User> colleagues = new ArrayList<>(); // fix, pass in proper user list
-                UsersAdapter usersAdapter = new UsersAdapter(users, keys);
+                UsersAdapter usersAdapter = new UsersAdapter(colleagues, keys);
 
                 colleagues = usersAdapter.getmUserList();
                 Log.d(TAG, colleagues.toString());
 
-
-                usersAdapter.updateColleagueList(newList);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(UserListActivity.this));
+                mRecyclerView.setAdapter(usersAdapter);
 
                 // Loop through all the colleagues
                 for (User colleague : colleagues) {
@@ -155,6 +149,8 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
                 // Instantiate the usersAdapter to make use of updateColleagueList function
 //        UsersAdapter usersAdapter = new UsersAdapter(this, colleagues);
                 usersAdapter.updateColleagueList(newList);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(UserListActivity.this));
+                mRecyclerView.setAdapter(usersAdapter);
 
                 // Tells searchview to handle onQueryTextChange instead of onQueryTextSubmit
             }
