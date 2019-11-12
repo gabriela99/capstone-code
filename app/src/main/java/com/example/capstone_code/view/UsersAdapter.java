@@ -84,11 +84,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
         return mUserList.size();
     }
 
-    public void updateColleagueList(List<User> mUserList) {
+    public void updateColleagueList(List<User> newList) {
 //        mUserList = new ArrayList<>();
 //        mUserList.addAll(newList);
 
-        this.mUserList = mUserList;
+        this.mUserList = newList;
         notifyDataSetChanged();
 
         Log.d(TAG, "updateColleagueList");
