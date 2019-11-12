@@ -2,6 +2,7 @@ package com.example.capstone_code.viewmodel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class UserListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
@@ -43,6 +46,12 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
                 UsersAdapter mUsersAdapter = new UsersAdapter(users, keys);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(UserListActivity.this));
                 mRecyclerView.setAdapter(mUsersAdapter);
+
+
+
+
+
+
             }
 
             @Override
@@ -116,24 +125,57 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
      * @return true
      */
     @Override
-    public boolean onQueryTextChange(String newText) {
-        String userInput = newText.toLowerCase();
-        List<User> newList = new ArrayList<>();
-        List<User> colleagues = new ArrayList<>();
+    public boolean onQueryTextChange(final String newText) {
+        Log.d(TAG, newText);
 
-        // Loop through all the colleagues
-        for (User colleague : colleagues) {
-            // if the colleagues name contains the queried text, add it to the results
-            if(colleague.getName().toLowerCase().contains(userInput)) {
-                newList.add(colleague);
+        new FirebaseDatabaseHelper().readUsers(new FirebaseDatabaseHelper.DataStatus() {
+
+            @Override
+            public void DataIsLoaded(List<User> users, List<String> keys) {
+                String userInput = newText.toLowerCase();
+                List<User> newList = new ArrayList<>();
+                List<User> colleagues = new ArrayList<>(); // fix, pass in proper user list
+                UsersAdapter usersAdapter = new UsersAdapter(users, keys);
+
+                colleagues = usersAdapter.getmUserList();
+                Log.d(TAG, colleagues.toString());
+
+
+                usersAdapter.updateColleagueList(newList);
+
+                // Loop through all the colleagues
+                for (User colleague : colleagues) {
+                    Log.d(TAG, colleague.toString());
+                    // if the colleagues name contains the queried text, add it to the results
+                    if(colleague.getName().toLowerCase().contains(userInput)) {
+                        newList.add(colleague);
+                    }
+                }
+
+                // Instantiate the usersAdapter to make use of updateColleagueList function
+//        UsersAdapter usersAdapter = new UsersAdapter(this, colleagues);
+                usersAdapter.updateColleagueList(newList);
+
+                // Tells searchview to handle onQueryTextChange instead of onQueryTextSubmit
             }
-        }
 
-        UsersAdapter usersAdapter = new UsersAdapter(this, colleagues);
-        usersAdapter.updateColleagueList(newList);
+            @Override
+            public void DataIsInserted() {
 
-        // Tells searchview to handle onQueryTextChange instead of onQueryTextSubmit
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
         return true;
+
     }
 }
 

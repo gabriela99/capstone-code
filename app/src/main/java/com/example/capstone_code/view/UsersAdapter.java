@@ -29,6 +29,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
         this.mKeys = mKeys;
     }
 
+
     public UsersAdapter(Context mContext, List<User> mUserList) {
         this.mContext = mContext;
         this.mUserList = mUserList;
