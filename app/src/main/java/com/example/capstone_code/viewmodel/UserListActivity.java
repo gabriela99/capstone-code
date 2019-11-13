@@ -135,7 +135,7 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
     public boolean onQueryTextChange(String newText) {
 
         // See user input in logcat
-        Log.d(TAG, newText);
+        Log.d(TAG, "User input is: " + newText);
 
         // Remove capitalization from user input
         final String userInput = newText.toLowerCase();
@@ -161,7 +161,7 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
                 // Fill the user list from the users adapter
                 colleagues = usersAdapter.getmUserList();
 
-                Log.d(TAG, colleagues.toString());
+                Log.d(TAG, "All colleagues in unfiltered list: " + colleagues.toString());
 
                 // Loop through all the colleagues
                 for (User colleague : colleagues) {
@@ -169,7 +169,7 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
                     // if the colleagues name contains the queried text, add it to the results
                     if(colleague.getName().toLowerCase().contains(userInput)) {
                         newList.add(colleague);
-                        Log.d(TAG, newList.toString());
+                        Log.d(TAG, "All colleagues in filtered list: " + newList.toString());
                     }
                 }
 
