@@ -25,20 +25,33 @@ import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
+/**
+ * Generate user list as a recycler view from firebase data
+ * Allow users to filter user list with search function within toolbar
+ */
 public class UserListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private RecyclerView mRecyclerView;
-    private Toolbar toolbar;
+    private Toolbar mToolbar;
 
+    /**
+     * Initialize toolbar and recyclerview of users list
+     * @param savedInstanceState continue to work with current state - logged in user
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
+        // Connect to XML
         mRecyclerView = findViewById(R.id.recyclerview_users);
+        mToolbar = findViewById(R.id.toolbar);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        // Ensure smooth scrolling: https://stackoverflow.com/questions/31249252/how-to-make-recyclerview-scroll-smoothly
+        mRecyclerView.setNestedScrollingEnabled(false);
+
+
+        setSupportActionBar(mToolbar);
 
         new FirebaseDatabaseHelper().readUsers(new FirebaseDatabaseHelper.DataStatus() {
             @Override
@@ -46,7 +59,6 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
                 UsersAdapter mUsersAdapter = new UsersAdapter(users, keys);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(UserListActivity.this));
                 mRecyclerView.setAdapter(mUsersAdapter);
-
             }
 
             @Override
@@ -122,11 +134,21 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
     @Override
     public boolean onQueryTextChange(String newText) {
 
+        // See user input in logcat
         Log.d(TAG, newText);
+
+        // Remove capitalization from user input
         final String userInput = newText.toLowerCase();
 
+        // Instantiate firebase database to see users found within the database
         new FirebaseDatabaseHelper().readUsers(new FirebaseDatabaseHelper.DataStatus() {
 
+            /**
+             * Upon text input from user and instatiation of firebase data,
+             * the data is retrieved and filtered to show results matching the user input
+             * @param colleagues empty list of users to be passed into adapter
+             * @param keys empty list of keys to be passed into adapter
+             */
             @Override
             public void DataIsLoaded(List<User> colleagues, List<String> keys) {
 
