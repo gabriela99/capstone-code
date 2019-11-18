@@ -3,13 +3,19 @@ package com.example.capstone_code.viewmodel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.capstone_code.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Take information from adapter and pass into xml fields for colleagues
@@ -18,6 +24,7 @@ import com.example.capstone_code.R;
 public class ColleagueProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "ColleagueProfileActivit";
+    private Toolbar mToolbar;
 
     /**
      * Takes current state and applies corresponding XML
@@ -29,6 +36,10 @@ public class ColleagueProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_colleague_profile);
         Log.d(TAG, "onCreate: started");
 
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getIncomingIntent();
     }
 
@@ -91,6 +102,47 @@ public class ColleagueProfileActivity extends AppCompatActivity {
 
         Intent intent = new Intent(ColleagueProfileActivity.this, UserListActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Fill the toolbar with the menu from the XML file and the search view
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_profile_menu, menu);
+        return true;
+    }
+
+    /**
+     * When profile is selected, user sent to profile
+     * When logout is selected, user is logged out
+     * @param item selected field from menu list
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.users_icon:
+                Intent intent = new Intent(this, ProfileActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.logout_icon:
+                FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+                mFirebaseAuth.signOut();
+                Intent intent_logout = new Intent(this, LoginActivity.class);
+                startActivity(intent_logout);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 }

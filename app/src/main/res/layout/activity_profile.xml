@@ -6,6 +6,9 @@
     tools:context=".viewmodel.ProfileActivity"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivProfileImage"
@@ -58,23 +61,23 @@
         android:layout_gravity="center"
         android:onClick="editSettings"/>
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_style"
-        android:layout_marginTop="10dp"
-        android:text="Logout"
-        android:layout_gravity="center"
-        android:onClick="logoutUser"/>
-    <Button
-        android:id="@+id/btnGoToList"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_style"
-        android:layout_marginTop="10dp"
-        android:text="User List"
-        android:layout_gravity="center"
-        android:onClick="goToList"/>
+<!--    <Button-->
+<!--        android:id="@+id/btnLogout"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/button_style"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="Logout"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:onClick="logoutUser"/>-->
+<!--    <Button-->
+<!--        android:id="@+id/btnGoToList"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/button_style"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="User List"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:onClick="goToList"/>-->
 
 </LinearLayout>

@@ -6,11 +6,11 @@
     tools:context=".viewmodel.SettingsActivity"
     android:orientation="vertical">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivProfileImage"
-        android:layout_width="100sp"
-        android:layout_height="100sp"
-        android:src="@mipmap/ic_launcher"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@mipmap/ic_default_image"
         android:layout_marginBottom="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="70dp"/>
@@ -41,17 +41,20 @@
 
     <Button
         android:id="@+id/btnConfirmSettings"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
         android:layout_gravity="center"
         android:text="Save"
         android:onClick="saveSettings"/>
 
     <Button
         android:id="@+id/btnBackToProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
         android:text="Cancel"
         android:onClick="backToProfile"/>
 

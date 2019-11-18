@@ -3,6 +3,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivProfileColleague"
         android:layout_width="200dp"
@@ -65,10 +69,10 @@
 
     <Button
         android:background="@drawable/button_style"
-        android:id="@+id/contact"
+        android:id="@+id/btnGoToList"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Contact"
+        android:text="Back"
         android:layout_gravity="center"
         android:onClick="contactColleague"/>
 
