@@ -26,7 +26,6 @@ import java.util.Map;
 /**
  * Put firebase outside of class - dependency injection
  */
-
 public class RegisterActivity extends AppCompatActivity {
     private EditText etEmailId, etPassword, etName;
     private Button btnRegister;
@@ -34,7 +33,10 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
 
-
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,10 @@ public class RegisterActivity extends AppCompatActivity {
         tvSignIn = findViewById(R.id.btnSignIn);
     }
 
+    /**
+     *
+     * @param view
+     */
     public void registerUser(View view) {
         final String name = etName.getText().toString();
         final String email = etEmailId.getText().toString();
@@ -106,18 +112,28 @@ public class RegisterActivity extends AppCompatActivity {
         return;
     }
 
+    /**
+     *
+     * @param view
+     */
     public void goToLogin(View view) {
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
         return;
     }
 
+    /**
+     *
+     */
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(firebaseAuthStateListener);
     }
 
+    /**
+     *
+     */
     @Override
     protected void onStop() {
         super.onStop();
