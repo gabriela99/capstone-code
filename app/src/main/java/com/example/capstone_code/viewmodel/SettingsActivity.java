@@ -102,20 +102,20 @@ public class SettingsActivity extends AppCompatActivity {
                 if (dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0) {
                     Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                     if (map.get("name") != null) {
-                        name = map.get("name").toString();
+                        name = map.get("name").toString().trim();
                         mUserName.setText(name);
                     }
                     if (map.get("role") != null) {
-                        String role = map.get("role").toString();
+                        String role = map.get("role").toString().trim();
                         mRole.setText(role);
                     }
                     if (map.get("skills") != null) {
-                        String skills = map.get("skills").toString();
+                        String skills = map.get("skills").toString().trim();
                         mSkills.setText(skills);
                     }
                     Glide.with(mProfileImage).clear(mProfileImage);
                     if (map.get("profileImageUrl") != null) {
-                        profileImageUrl = map.get("profileImageUrl").toString();
+                        profileImageUrl = map.get("profileImageUrl").toString().trim();
                         switch (profileImageUrl) {
                             case "default":
                                 Glide.with(getApplication()).load(R.mipmap.ic_launcher).into(mProfileImage);
@@ -201,12 +201,11 @@ public class SettingsActivity extends AppCompatActivity {
             }
 
             /**
-             *
+             * After the text is done changing, check the value of the text view
              * @param s
              */
             @Override
             public void afterTextChanged (android.text.Editable s) {
-                // After the text is done changing, check the value of the text view
                 // If the length of the string equals 0 (so an empty input), call
                 // again the showDropdown() function
                 if (acTextViewRoles.getText().toString().length() == 0) {
@@ -330,6 +329,10 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param view
+     */
     public void saveSettings(View view) {
         boolean isInputValid = validateInput();
         if (isInputValid) {
@@ -340,6 +343,10 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param view
+     */
     public void backToProfile(View view) {
         Intent intent = new Intent(SettingsActivity.this, ProfileActivity.class);
         startActivity(intent);
