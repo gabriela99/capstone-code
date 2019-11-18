@@ -16,8 +16,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_users"
-        android:layout_width="374dp"
-        android:layout_height="681dp"
+        android:layout_width="379dp"
+        android:layout_height="671dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="?android:selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
