@@ -138,7 +138,7 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
         Log.d(TAG, "User input is: " + newText);
 
         // Remove capitalization from user input
-        final String userInput = newText.toLowerCase();
+        final String userInput = newText.toLowerCase().trim();
 
         // Instantiate firebase database to see users found within the database
         new FirebaseDatabaseHelper().readUsers(new FirebaseDatabaseHelper.DataStatus() {
@@ -167,7 +167,9 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
                 for (User colleague : colleagues) {
                     Log.d(TAG, colleague.getName());
                     // if the colleagues name contains the queried text, add it to the results
-                    if(colleague.getName().toLowerCase().contains(userInput)) {
+                    if(colleague.getName().toLowerCase().contains(userInput)
+                            || colleague.getSkills().toLowerCase().contains(userInput)
+                            || colleague.getRole().toLowerCase().contains(userInput)) {
                         newList.add(colleague);
                         Log.d(TAG, "All colleagues in filtered list: " + newList.toString());
                     }
