@@ -61,17 +61,31 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        findLayoutFields();
+        instantiateFirebase();
+        pickProfileImage();
+        getUserInfo();
+
+        autoCompleteText(roleOptions, mRole);
+        autoCompleteText(skillOptions, mSkills);
+    }
+
+    private void instantiateFirebase() {
+        mAuth = FirebaseAuth.getInstance();
+        userId = mAuth.getCurrentUser().getUid();
+        mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+    }
+
+    private void findLayoutFields() {
         mProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
         mUserName = (EditText) findViewById(R.id.etUserName);
         mRole = (EditText) findViewById(R.id.etRole);
         mSkills = (EditText) findViewById(R.id.etSkills);
         confirmSettings = (Button) findViewById(R.id.btnConfirmSettings);
         backToProfile = (Button) findViewById(R.id.btnBackToProfile);
+    }
 
-        mAuth = FirebaseAuth.getInstance();
-        userId = mAuth.getCurrentUser().getUid();
-        mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-
+    private void pickProfileImage() {
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,12 +94,6 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
-
-        getUserInfo();
-
-        // Allow the user to type in a character and have autocomplete options provided from the options lists
-        autoCompleteText(roleOptions, mRole);
-        autoCompleteText(skillOptions, mSkills);
     }
 
     /**
@@ -101,6 +109,8 @@ public class SettingsActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0) {
                     Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+
+                    // Redundant, make method ******
                     if (map.get("name") != null) {
                         name = map.get("name").toString().trim();
                         mUserName.setText(name);
@@ -134,7 +144,7 @@ public class SettingsActivity extends AppCompatActivity {
              */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                return;
             }
         });
     }
@@ -249,10 +259,12 @@ public class SettingsActivity extends AppCompatActivity {
         name = mUserName.getText().toString().trim();
         role = mRole.getText().toString().trim();
         skills = mSkills.getText().toString().trim();
+        
         // Do the check for both fields if role or skill in list or not yet filled
         boolean isNameValid = name.length() >= 1;
         boolean isRoleValid = isStringInList(roleOptions, role) || role.equals("");
         boolean isSkillsValid = isStringInList(skillOptions, skills) || skills.equals("");
+
         // If both role and skills are from the predefined list, return true for valid settings
         if (isNameValid && isRoleValid && isSkillsValid) {
             return true;
@@ -338,7 +350,6 @@ public class SettingsActivity extends AppCompatActivity {
         if (isInputValid) {
             saveUserInformation();
         } else {
-            // Show an error message if the inputs are not valid
             Toast.makeText(SettingsActivity.this,"Invalid Input! Please check that selected role and skills match the available options.",Toast.LENGTH_SHORT).show();
         }
     }
