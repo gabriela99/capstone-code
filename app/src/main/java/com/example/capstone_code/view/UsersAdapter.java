@@ -17,6 +17,9 @@ import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
+/**
+ * Takes information from User model and UserItemView's XML fields and connects them
+ */
 public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
     private List<User> mUserList;
     private List<String> mKeys;
@@ -27,12 +30,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
     public UsersAdapter(List<User> mUserList, List<String> mKeys) {
         this.mUserList = mUserList;
         this.mKeys = mKeys;
-    }
-
-
-    public UsersAdapter(Context mContext, List<User> mUserList) {
-        this.mContext = mContext;
-        this.mUserList = mUserList;
     }
 
     public List<User> getmUserList() {
@@ -48,6 +45,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
         return new UserItemView(parent);
     }
 
+    /**
+     * Gets colleague info from model and applies it to field, and
+     * sends current user to said colleague when their card is clicked
+     * @param holder fields to be filled from UserItemView
+     * @param position the colleague whose field is to be filled in the user list
+     */
     @Override
     public void onBindViewHolder(@NonNull UserItemView holder, final int position) {
 //            Glide.with(mContext)
@@ -71,6 +74,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
                 intent.putExtra("colleague_name", mUserList.get(position).getName());
                 intent.putExtra("colleague_role", mUserList.get(position).getRole());
                 intent.putExtra("colleague_skills", mUserList.get(position).getSkills());
+//                intent.putExtra("colleague_email", mUserList.get(position).getEmail());
 
                 view.getContext().startActivity(intent);
             }
@@ -85,10 +89,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
         return mUserList.size();
     }
 
+    /**
+     * Update user list with the new filtered list
+     * @param newList
+     */
     public void updateColleagueList(List<User> newList) {
-//        mUserList = new ArrayList<>();
-//        mUserList.addAll(newList);
-
         this.mUserList = newList;
         notifyDataSetChanged();
 
