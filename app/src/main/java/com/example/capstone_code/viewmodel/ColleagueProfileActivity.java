@@ -1,7 +1,9 @@
 package com.example.capstone_code.viewmodel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -48,6 +50,7 @@ public class ColleagueProfileActivity extends AppCompatActivity {
             String colleagueName = getIntent().getStringExtra("colleague_name");
             String colleagueRole = getIntent().getStringExtra("colleague_role");
             String colleagueSkills = getIntent().getStringExtra("colleague_skills");
+//            String colleagueEmail = getIntent().getStringExtra("colleague_email");
 
             // Pass in information from adapter into corresponding XML fields
             setInfo(colleagueName, colleagueRole, colleagueSkills);
@@ -80,4 +83,14 @@ public class ColleagueProfileActivity extends AppCompatActivity {
 //                .load(imageUrl)
 //                .into(image);
     }
+
+    public void contactColleague(View view) {
+//        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+//        emailIntent.setData(Uri.parse("mailto:abc@xyz.com"));
+//        startActivity(Intent.createChooser(emailIntent, "Send feedback"));
+
+        Intent intent = new Intent(ColleagueProfileActivity.this, UserListActivity.class);
+        startActivity(intent);
+    }
+
 }
