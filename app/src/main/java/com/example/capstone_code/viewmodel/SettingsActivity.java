@@ -5,12 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -19,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.capstone_code.R;
+import com.example.capstone_code.utils.autoCompleteText;
 import com.example.capstone_code.utils.getUserInfo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -60,12 +57,9 @@ public class SettingsActivity extends AppCompatActivity {
         pickProfileImage();
 //        getUserInfo();
 
-        autoCompleteText(roleOptions, mRole);
-        autoCompleteText(skillOptions, mSkills);
-
-//        autoCompleteText autoCompleteText = new autoCompleteText();
-//        autoCompleteText.autoCompleteText(roleOptions, mRole);
-//        autoCompleteText.autoCompleteText(skillOptions, mSkills);
+        autoCompleteText autoCompleteText = new autoCompleteText();
+        autoCompleteText.autoCompleteText(roleOptions, mRole, this);
+        autoCompleteText.autoCompleteText(skillOptions, mSkills, this);
 
         getUserInfo getUserInfo = new getUserInfo();
         getUserInfo.getUserInfoFromDatabase(mUserName, mRole, mSkills);
@@ -95,143 +89,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
-
-//    /**
-//     *
-//     */
-//    private void getUserInfo() {
-//        mCustomerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-//            /**
-//             *
-//             * @param dataSnapshot
-//             */
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0) {
-//                    Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-//
-//                    // Redundant, make method ******
-//                    if (map.get("name") != null) {
-//                        name = map.get("name").toString().trim();
-//                        mUserName.setText(name);
-//                    }
-//                    if (map.get("role") != null) {
-//                        String role = map.get("role").toString().trim();
-//                        mRole.setText(role);
-//                    }
-//                    if (map.get("skills") != null) {
-//                        String skills = map.get("skills").toString().trim();
-//                        mSkills.setText(skills);
-//                    }
-//                    Glide.with(mProfileImage).clear(mProfileImage);
-//                    if (map.get("profileImageUrl") != null) {
-//                        profileImageUrl = map.get("profileImageUrl").toString().trim();
-//                        switch (profileImageUrl) {
-//                            case "default":
-//                                Glide.with(getApplication()).load(R.mipmap.ic_launcher).into(mProfileImage);
-//                                break;
-//                            default:
-//                                Glide.with(getApplication()).load(profileImageUrl).into(mProfileImage);
-//                                break;
-//                        }
-//                    }
-//                }
-//            }
-//
-//            /**
-//             *
-//             * @param databaseError
-//             */
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                return;
-//            }
-//        });
-//    }
-
-    /**
-     *
-     * @param listOptions
-     * @param mField
-     */
-    private void autoCompleteText(String[] listOptions, EditText mField) {
-        //Create the instance of ArrayAdapter containing list of roles
-        ArrayAdapter<String> adapterRoles = new ArrayAdapter<>(this,android.R.layout.select_dialog_singlechoice, listOptions);
-
-        //Find TextView control
-        final AutoCompleteTextView acTextViewRoles = (AutoCompleteTextView) mField;
-
-        //Set the number of characters the user must type before the drop down list is shown
-        acTextViewRoles.setThreshold(0);
-
-        //Set the adapter
-        acTextViewRoles.setAdapter(adapterRoles);
-
-        // When the user first focuses on the field, show all options
-        acTextViewRoles.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            /**
-             *
-             * @param textView
-             * @param hasFocus
-             */
-            @Override
-            public void onFocusChange(View textView, boolean hasFocus) {
-                // If the view is focused, show the dropdown
-                if(hasFocus){
-                    acTextViewRoles.showDropDown();
-                }
-            }
-        });
-
-        // When the user deletes a character, the options list is shown again if
-        // it matches an option(s) in the list or if there is no longer any
-        // characters in the field
-        acTextViewRoles.addTextChangedListener(new TextWatcher() {
-
-            /**
-             *
-             * @param s
-             * @param start
-             * @param count
-             * @param after
-             */
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            /**
-             *
-             * @param s
-             * @param start
-             * @param before
-             * @param count
-             */
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            /**
-             * After the text is done changing, check the value of the text view
-             * @param s
-             */
-            @Override
-            public void afterTextChanged (android.text.Editable s) {
-                // If the length of the string equals 0 (so an empty input), call
-                // again the showDropdown() function
-                if (acTextViewRoles.getText().toString().length() == 0) {
-                    // Handler to run after delay https://developer.android.com/reference/android/os/Handler
-                    final Handler handler = new Handler();
-                    // Waits 100 milliseconds before executing showDropDown()
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            acTextViewRoles.showDropDown();
-                        }
-                    }, 100);
-                }
-            }
-        });
-    }
+    
 
     /**
      *

@@ -18,9 +18,9 @@ public class autoCompleteText {
      * @param listOptions
      * @param mField
      */
-    public void autoCompleteText(String[] listOptions, EditText mField) {
+    public void autoCompleteText(String[] listOptions, EditText mField, Context context) {
         //Create the instance of ArrayAdapter containing list of roles
-        ArrayAdapter<String> adapterRoles = new ArrayAdapter<>(mContext,android.R.layout.select_dialog_singlechoice, listOptions);
+        ArrayAdapter<String> adapterRoles = new ArrayAdapter<>(context,android.R.layout.select_dialog_singlechoice, listOptions);
 
         //Find TextView control
         final AutoCompleteTextView acTextViewRoles = (AutoCompleteTextView) mField;
