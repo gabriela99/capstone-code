@@ -11,7 +11,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -42,14 +41,13 @@ public class SettingsActivity extends AppCompatActivity {
 
     private ImageView mProfileImage;
     private EditText mUserName, mRole, mSkills;
-    private Button confirmSettings, backToProfile;
     private FirebaseAuth mAuth;
     private DatabaseReference mCustomerDatabase;
     private String userId, name, role, skills, profileImageUrl;
 
     private Uri resultUri;
-    String[] roleOptions = { "Interaction Designer", "Software Engineer", "Product Manager" };
-    String[] skillOptions = { "Design thinking", "Agile", "Interpersonal skills", "Java" };
+    private String[] roleOptions = { "Interaction Designer", "Software Engineer", "Product Manager" };
+    private String[] skillOptions = { "Design thinking", "Agile", "Interpersonal skills", "Java" };
 
 
     /**
@@ -77,12 +75,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void findLayoutFields() {
-        mProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
-        mUserName = (EditText) findViewById(R.id.etUserName);
-        mRole = (EditText) findViewById(R.id.etRole);
-        mSkills = (EditText) findViewById(R.id.etSkills);
-        confirmSettings = (Button) findViewById(R.id.btnConfirmSettings);
-        backToProfile = (Button) findViewById(R.id.btnBackToProfile);
+        mProfileImage = findViewById(R.id.ivProfileImage);
+        mUserName = findViewById(R.id.etUserName);
+        mRole = findViewById(R.id.etRole);
+        mSkills = findViewById(R.id.etSkills);
     }
 
     private void pickProfileImage() {
