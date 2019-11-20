@@ -106,6 +106,10 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
                 Intent intent = new Intent(this, ProfileActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.sensor_icon:
+                Intent sensor_intent = new Intent(this, SensorActivity.class);
+                startActivity(sensor_intent);
+                return true;
             case R.id.logout_icon:
                 FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
                 mFirebaseAuth.signOut();

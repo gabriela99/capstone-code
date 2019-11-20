@@ -8,6 +8,10 @@
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
+    <item android:id="@+id/sensor_icon"
+        android:title="Sensor"
+        app:showAsAction="never" />
+
     <item android:id="@+id/profile_icon"
         android:title="Profile"
         app:showAsAction="never" />
