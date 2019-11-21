@@ -20,10 +20,12 @@ This project is an android app written with Java with a Firebase database.
 │   │               ├── model
 │   │               │   └── User.java                             Model of what a user entity must include
 │   │               ├── utils
+│   │               │   └── autoCompleteText.java                 Autocompletion of roles and skills that is used in settings
 │   │               │   └── FirebaseDatabaseHelper.java           Fetches information about users and colleagues from database
+│   │               │   └── getUserInfo.java                      Gets user information from Firebase datasnapshot
 │   │               ├── view
-│   │               │   ├── UserItemView.java                     
-│   │               │   └── UsersAdapter.java                     
+│   │               │   ├── UserItemView.java                     For the UserList recycler view, model is bound to XML fields
+│   │               │   └── UsersAdapter.java                     Uses UserItemView to fill recycler view with current users
 │   │               └── viewmodel
 │   │                   ├── ColleagueProfileActivity.java         Profile page of colleague
 │   │                   ├── LoginActivity.java                    Allows an already created user to login with their info
@@ -33,46 +35,9 @@ This project is an android app written with Java with a Firebase database.
 │   │                   ├── SearchActivity.java     
 │   │                   ├── SettingsActivity.java                 Allows user to edit the fields found on their profile page
 │   │                   └── UserListActivity.java                 Displays colleagues and allows the user to filter results
-│   └── res
-│       ├── drawable
-│       │   ├── ic_icon.xml
-│       │   ├── ic_launcher_background.xml
-│       │   ├── ic_search_background.xml
-│       │   └── ic_search_foreground.xml
-│       ├── drawable-v24
-│       │   └── ic_launcher_foreground.xml
-│       ├── layout
-│       │   ├── activity_colleague_profile.xml
-│       │   ├── activity_login.xml
-│       │   ├── activity_profile.xml
-│       │   ├── activity_register.xml
-│       │   ├── activity_role.xml
-│       │   ├── activity_search.xml
-│       │   ├── activity_settings.xml
-│       │   ├── activity_user_list.xml
-│       │   ├── layout_listitem.xml
-│       │   ├── toolbar.xml
-│       │   └── user_list_item.xml
-│       ├── menu
-│       │   └── toolbar_menu.xml
-│       ├── mipmap-anydpi-v26
-│       │   └── ...
-│       ├── mipmap-hdpi
-│       │   └── ...
-│       ├── mipmap-mdpi
-│       │   └── ...
-│       ├── mipmap-xhdpi
-│       │   └── ...
-│       ├── mipmap-xxhdpi
-│       │   └── ...
-│       ├── mipmap-xxxhdpi
-│       │   └── ...
-│       ├── values
-│       │   ├── colors.xml
-│       │   ├── strings.xml
-│       │   └── styles.xml
-│       └── view
-└── test
+│   └── res                                                       Directory for XML, including layout of all Activity pages
+|       └── ...
+└── test                                                          Directory for unit, instrumented, and UI tests
     └── ...
 ```
 
@@ -94,6 +59,7 @@ There are multiple ways to run an Android application. The following are 3 diffe
 #### More information
 * [Android studio overview](https://developer.android.com/tools/studio/index.html)
 
+## Technical paper
 
-
+* This paper can be found in [this repo's wiki] (https://github.com/gabriela99/capstone-code/wiki/Technical-Paper)
 
