@@ -32,7 +32,7 @@ This project is an android app written with Java with a Firebase database.
 │   │                   ├── ProfileActivity.java                  Profile page of current active user
 │   │                   ├── RegisterActivity.java                 Page where user inputs their information for a new account
 │   │                   ├── RoleActivity.java                     Part of the registration process, user provides role
-│   │                   ├── SearchActivity.java     
+│   │                   ├── SensorActivity.java                   Displays accelerometer information - for mobile module
 │   │                   ├── SettingsActivity.java                 Allows user to edit the fields found on their profile page
 │   │                   └── UserListActivity.java                 Displays colleagues and allows the user to filter results
 │   └── res                                                       Directory for XML, including layout of all Activity pages
