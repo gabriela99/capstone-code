@@ -2,7 +2,25 @@
 
 This project is an Android app written in Java for the purpose of assisting a Product Management student's capstone project. The goal for this app was to connect colleagues within an organization by means of searching for colleagues with specific skills and by providing the user with the ability to see the contact information of said colleagues. 
 
-### Directory Tree
+## Prerequisites
+
+#### Install/Configure Android Studio
+* [Install Android Studio](http://developer.android.com/sdk/installing/index.html?pkg=studio)
+
+#### Install/Configure Emulators or Android Devices
+There are multiple ways to run an Android application. The following are 3 different solutions: 
+* [Create/Configure an emulator](http://developer.android.com/tools/devices/managing-avds.html)
+* [Install](https://www.genymotion.com/#!/download) and [Create/Configure](https://www.genymotion.com/#!/developers/user-guide) GenyMotion emulator
+* [Configure an Android device](http://developer.android.com/tools/device.html)
+
+#### Import the project into Android Studio
+* Repository URL : **git@github.com:gabriela99/capstone-code.git**
+* Clone and change directory to capstone-code
+
+#### More information
+* [Android studio overview](https://developer.android.com/tools/studio/index.html)
+
+## Directory Tree
 
 ```
 .
@@ -38,24 +56,6 @@ This project is an Android app written in Java for the purpose of assisting a Pr
 └── test                                                          Directory for unit, instrumented, and UI tests
     └── ...
 ```
-
-## Prerequisites
-
-#### Install/Configure Android Studio
-* [Install Android Studio](http://developer.android.com/sdk/installing/index.html?pkg=studio)
-
-#### Install/Configure Emulators or Android Devices
-There are multiple ways to run an Android application. The following are 3 different solutions: 
-* [Create/Configure an emulator](http://developer.android.com/tools/devices/managing-avds.html)
-* [Install](https://www.genymotion.com/#!/download) and [Create/Configure](https://www.genymotion.com/#!/developers/user-guide) GenyMotion emulator
-* [Configure an Android device](http://developer.android.com/tools/device.html)
-
-#### Import the project into Android Studio
-* Repository URL : **git@github.com:gabriela99/capstone-code.git**
-* Clone and change directory to capstone-code
-
-#### More information
-* [Android studio overview](https://developer.android.com/tools/studio/index.html)
 
 ## Features
 As was seen previously in the short directory tree explanations, here are the features:
@@ -96,7 +96,7 @@ As was seen previously in the short directory tree explanations, here are the fe
   - Found by accessing the menu in the toolbar
   - Composed of `SensorActivity.java` and `activity_sensor.xml`
 
-### Technical paper
+## Technical paper
 
 * The technical details for the features mentioned above, as well as general architecture details can be found in the technical paper. It is located in [this repo's wiki](https://github.com/gabriela99/capstone-code/wiki/Technical-Paper)
 
