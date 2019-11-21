@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private Toolbar mToolbar;
+    private TextView xValue, yValue, zValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,11 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        xValue = findViewById(R.id.xValue);
+        yValue = findViewById(R.id.yValue);
+        zValue = findViewById(R.id.zValue);
+
+
         Log.d(TAG, "onCreate: Initializing Sensor Services");
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -47,6 +54,11 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         Log.d(TAG, "onSensorChanged: X: " + sensorEvent.values[0] + "Y: " + sensorEvent.values[1] + "Z: " + sensorEvent.values[2]);
+
+        xValue.setText("xValue " + sensorEvent.values[0]);
+        yValue.setText("yValue " + sensorEvent.values[1]);
+        zValue.setText("zValue " + sensorEvent.values[2]);
+
     }
 
     @Override
