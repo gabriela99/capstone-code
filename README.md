@@ -61,5 +61,5 @@ There are multiple ways to run an Android application. The following are 3 diffe
 
 ## Technical paper
 
-* This paper can be found in [this repo's wiki] (https://github.com/gabriela99/capstone-code/wiki/Technical-Paper)
+* This paper can be found in [this repo's wiki](https://github.com/gabriela99/capstone-code/wiki/Technical-Paper)
 
