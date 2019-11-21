@@ -1,10 +1,8 @@
-# Capstone Project
------
-The app that enables users to find colleagues with certain skill sets.
+# Reto
 
-## About
-This project is an android app written with Java with a Firebase database.
+This project is an Android app written in Java for the purpose of assisting a Product Management student's capstone project. The goal for this app was to connect colleagues within an organization by means of searching for colleagues with specific skills and by providing the user with the ability to see the contact information of said colleagues. 
 
+### Directory Tree
 
 ```
 .
@@ -59,7 +57,46 @@ There are multiple ways to run an Android application. The following are 3 diffe
 #### More information
 * [Android studio overview](https://developer.android.com/tools/studio/index.html)
 
-## Technical paper
+## Features
+As was seen previously in the short directory tree explanations, here are the features:
 
-* This paper can be found in [this repo's wiki](https://github.com/gabriela99/capstone-code/wiki/Technical-Paper)
+* **Registration** 
+  - Page where user inputs their information for a new account
+  - Accessible via the Login page 
+  - Composed of `RegisterActivity.java` and `activity_register.xml`
+* **Login** 
+  - Page where user inputs their information for a new account
+  - First page to appear
+  - Composed of `LoginActivity.java` and `activity_login.xml`
+* **User List** 
+  - Page where user inputs their information for a new account 
+  - Found after user successfully logs in
+  - Composed of `UserListActivity.java` and `activity_user_list.xml`
+* **User Item** 
+  - Displays the individual users that are found within the user list 
+  - Composed of `UserListView.java` and `user_list_item.xml`
+* **Toolbar** 
+  - Toolbar used across activities
+  - Found at the top of User List, Profile, Colleague Profile, and Sensor pages
+  - Composed of `toolbar.xml` and either `toolbar_menu.xml` or `toolbar_profile_menu.xml`
+* **Colleague Profile** 
+  - Profile page of colleagues of the user 
+  - Found by clicking on the card belonging to said colleague within the User List
+  - Composed of `ColleagueProfileActivity.java` and `activity_colleague_profile.xml`
+* **Profile** 
+  - Profile page of active user 
+  - Found by accessing the menu in the toolbar
+  - Composed of `ProfileActivity.java` and `activity_profile.xml`
+* **Settings** 
+  - Page where user can change own `name`, `role`, or `skills` 
+  - Accessible via the Profile or after Registration
+  - Composed of `SettingsActivity.java` and `activity_settings.xml`
+* **Sensor** 
+  - Page with sensor data from an accelerometer
+  - Found by accessing the menu in the toolbar
+  - Composed of `SensorActivity.java` and `activity_sensor.xml`
+
+### Technical paper
+
+* The technical details for the features mentioned above, as well as general architecture details can be found in the technical paper. It is located in [this repo's wiki](https://github.com/gabriela99/capstone-code/wiki/Technical-Paper)
 
