@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".viewmodel.SensorActivity"></activity>
         <activity android:name=".viewmodel.RoleActivity" />
-        <activity android:name=".viewmodel.SearchActivity" />
         <activity android:name=".viewmodel.UserListActivity" />
         <activity android:name=".viewmodel.SettingsActivity" />
         <activity android:name=".viewmodel.RegisterActivity" />
