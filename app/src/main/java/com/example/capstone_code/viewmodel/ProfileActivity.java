@@ -30,16 +30,18 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mUser;
     private Toolbar mToolbar;
+    private TextView email, name, role, skills;
 
     /**
-     *
-     * @param savedInstanceState
+     * When this page is opened, fields are filled with Firebase data of current user
+     * @param savedInstanceState current state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        // Toolbar
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -52,11 +54,12 @@ public class ProfileActivity extends AppCompatActivity {
         DatabaseReference uidRef = rootRef.child("Users").child(uid);
 
 
+        // Information for fields of current user
         ValueEventListener valueEventListener = new ValueEventListener() {
 
             /**
              * Display the users email, name, role and skills by fetching information
-             * from Firebase and connecting to the XML by finding each field by their id's
+             * from Firebase and fill view with it
              * @param dataSnapshot snapshot of current user information
              */
             @Override
@@ -66,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Object dbRole = dataSnapshot.child("role").getValue();
                 Object dbSkills = dataSnapshot.child("skills").getValue();
 
-                // Ensure the user data is not null, if it is then have an empty string
+                // Change dbField to string
                 String mUserName = dbUserName != null ? dbUserName.toString() : "";
                 String mRole = dbRole != null ? dbRole.toString() : "";
                 String mSkills = dbSkills != null ? dbSkills.toString() : "";
@@ -74,11 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
                 // Test to see if working
                 Log.d("TAG", mUserName + " / " + mRole + " / " + mSkills);
 
-                // Connect to XML by finding each id
-                TextView email = findViewById(R.id.tvEmailProfile);
-                TextView name = findViewById(R.id.tvNameProfile);
-                TextView role = findViewById(R.id.tvRoleProfile);
-                TextView skills = findViewById(R.id.tvSkillsProfile);
+                findLayoutFields();
 
                 // Fill XML fields with data from Firebase
                 email.setText(mUser.getEmail());
@@ -99,6 +98,16 @@ public class ProfileActivity extends AppCompatActivity {
             }
         };
         uidRef.addValueEventListener(valueEventListener);
+    }
+
+    /**
+     * Find the corresponding xml fields
+     */
+    private void findLayoutFields() {
+        email = findViewById(R.id.tvEmailProfile);
+        name = findViewById(R.id.tvNameProfile);
+        role = findViewById(R.id.tvRoleProfile);
+        skills = findViewById(R.id.tvSkillsProfile);
     }
 
     // Edit //
