@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- *
+ * Displays current user information, toolbar, and allows user to redirect to edit page
  */
 public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
@@ -100,12 +100,8 @@ public class ProfileActivity extends AppCompatActivity {
         };
         uidRef.addValueEventListener(valueEventListener);
     }
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
 
+    // Edit //
     /**
      * Triggered when the user clicks on the "edit" button (id/btnSettings)
      * Redirects the user from the profile page to the settings page
@@ -118,6 +114,17 @@ public class ProfileActivity extends AppCompatActivity {
         // Send user from profile to settings
         Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+    // Toolbar //
+    /**
+     * Takes user to previous page
+     * @return true if back button is pressed
+     */
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     /**
@@ -153,43 +160,5 @@ public class ProfileActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Triggered when the user clicks on the "logout" button (id/btnLogout)
-     * Logs the user out from the Firebase account associated with the current activity
-     * Redirects the now logged out user from the profile page to the login page
-     * @param view the View it is associated with the logoutUser button
-     */
-    public void logoutUser(View view) {
-        // Sign user out
-        mFirebaseAuth = FirebaseAuth.getInstance();
-
-        mFirebaseAuth.signOut();
-
-        // Send user from profile to login page
-        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-        startActivity(intent);
-
-//        try {
-//            Object o = null;
-//            Log.e("TEST", "causing an error on purpose");
-//            o.equals(null);
-//        } catch(Exception e) {
-//            e.printStackTrace();
-//            Log.e("TEST","error",e);
-//        }
-        finish();
-    }
-
-    /**
-     * Triggered when the user clicks on the "user list" button (id/btnGoToList)
-     * Redirects the user from the profile page to the settings page
-     * @param view the View it is associated with the goToList button
-     */
-    public void goToList(View view) {
-        // Send user from profile to user list page
-        Intent intent = new Intent(ProfileActivity.this, UserListActivity.class);
-        startActivity(intent);
     }
 }
