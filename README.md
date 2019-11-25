@@ -95,6 +95,9 @@ As was seen previously in the short directory tree explanations, here are the fe
   - Page with sensor data from an accelerometer
   - Found by accessing the menu in the toolbar
   - Composed of `SensorActivity.java` and `activity_sensor.xml`
+  
+## Demo
+![](https://raw.githubusercontent.com/gabriela99/capstone-code/master/documentation/mAndroidApp.gif)
 
 ## Technical paper
 
