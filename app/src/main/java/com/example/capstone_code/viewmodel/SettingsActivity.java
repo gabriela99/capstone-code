@@ -55,7 +55,6 @@ public class SettingsActivity extends AppCompatActivity {
         findLayoutFields();
         instantiateFirebase();
         pickProfileImage();
-//        getUserInfo();
 
         autoCompleteText autoCompleteText = new autoCompleteText();
         autoCompleteText.autoCompleteText(roleOptions, mRole, this);
@@ -66,6 +65,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Find the corresponding xml fields
+     */
     private void findLayoutFields() {
         mProfileImage = findViewById(R.id.ivProfileImage);
         mUserName = findViewById(R.id.etUserName);
@@ -89,7 +91,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
-    
+
 
     /**
      *
@@ -200,8 +202,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param view
+     * Calls save user information if valid input, and gives error if not
+     * @param view current state
      */
     public void saveSettings(View view) {
         boolean isInputValid = validateInput();
@@ -213,8 +215,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param view
+     * Redirects user from current page to profile page
+     * @param view current state
      */
     public void backToProfile(View view) {
         Intent intent = new Intent(SettingsActivity.this, ProfileActivity.class);
