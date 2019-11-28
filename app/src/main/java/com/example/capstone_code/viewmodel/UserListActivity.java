@@ -57,7 +57,11 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
             @Override
             public void DataIsLoaded(List<User> users, List<String> keys) {
                 UsersAdapter mUsersAdapter = new UsersAdapter(users, keys);
+
+                // Layout Manager defines how recycler view (user list) will look
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(UserListActivity.this));
+
+                // Fills the recycler view (user list) with content from database via adapter
                 mRecyclerView.setAdapter(mUsersAdapter);
             }
 
@@ -160,24 +164,14 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
                 UsersAdapter usersAdapter = new UsersAdapter(colleagues, keys);
 
                 // Instantiation of empty array list
-                List<User> newList = new ArrayList<>();
+//                List<User> newList = new ArrayList<>();
 
                 // Fill the user list from the users adapter
                 colleagues = usersAdapter.getmUserList();
 
                 Log.d(TAG, "All colleagues in unfiltered list: " + colleagues.toString());
 
-                // Loop through all the colleagues
-                for (User colleague : colleagues) {
-                    Log.d(TAG, colleague.getName());
-                    // if the colleagues name contains the queried text, add it to the results
-                    if(colleague.getName().toLowerCase().contains(userInput)
-                            || colleague.getSkills().toLowerCase().contains(userInput)
-                            || colleague.getRole().toLowerCase().contains(userInput)) {
-                        newList.add(colleague);
-                        Log.d(TAG, "All colleagues in filtered list: " + newList.toString());
-                    }
-                }
+                List<User> newList = searchUsers(colleagues, userInput);
 
                 // Renew the recycler view with filtered list
                 usersAdapter.updateColleagueList(newList);
@@ -203,5 +197,33 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
         return true;
 
     }
+
+    /**
+     * Ensure user input from onQueryTextChange remains upon resume, eg rotate screen
+     * @param outState
+     */
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        
+
+    }
+
+    public List<User> searchUsers(List<User> colleagues, String userInput) {
+        List<User> newList = new ArrayList<>();
+
+        for (User colleague : colleagues) {
+            Log.d(TAG, colleague.getName());
+            // if the colleagues name contains the queried text, add it to the results
+            if (colleague.getName().toLowerCase().contains(userInput)
+                    || colleague.getSkills().toLowerCase().contains(userInput)
+                    || colleague.getRole().toLowerCase().contains(userInput)) {
+                newList.add(colleague);
+                Log.d(TAG, "All colleagues in filtered list: " + newList.toString());
+            }
+        }
+        return newList;
+    }
 }
+
 
