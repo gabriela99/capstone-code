@@ -118,6 +118,9 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
                 FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
                 mFirebaseAuth.signOut();
                 Intent intent_logout = new Intent(this, LoginActivity.class);
+                intent_logout.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent_logout);
                 return true;
         }
@@ -163,9 +166,6 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
                 // Instantiation of UsersAdapter to use updateColleagueList
                 UsersAdapter usersAdapter = new UsersAdapter(colleagues, keys);
 
-                // Instantiation of empty array list
-//                List<User> newList = new ArrayList<>();
-
                 // Fill the user list from the users adapter
                 colleagues = usersAdapter.getmUserList();
 
@@ -195,25 +195,20 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
             }
         });
         return true;
-
     }
 
     /**
-     * Ensure user input from onQueryTextChange remains upon resume, eg rotate screen
-     * @param outState
+     * Loop through colleagues' names, roles, and skills that match the users search input
+     * @param colleagues list of existing users
+     * @param userInput text input of user into searchbar
+     * @return list of colleagues that contain the user input
      */
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        
-
-    }
-
     public List<User> searchUsers(List<User> colleagues, String userInput) {
         List<User> newList = new ArrayList<>();
 
         for (User colleague : colleagues) {
             Log.d(TAG, colleague.getName());
+
             // if the colleagues name contains the queried text, add it to the results
             if (colleague.getName().toLowerCase().contains(userInput)
                     || colleague.getSkills().toLowerCase().contains(userInput)
@@ -223,6 +218,17 @@ public class UserListActivity extends AppCompatActivity implements SearchView.On
             }
         }
         return newList;
+    }
+
+    /**
+     * Ensure user input from onQueryTextChange remains upon resume, eg rotate screen
+     * @param outState
+     */
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+
     }
 }
 

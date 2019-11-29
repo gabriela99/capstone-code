@@ -133,6 +133,9 @@ public class ColleagueProfileActivity extends AppCompatActivity {
                 FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
                 mFirebaseAuth.signOut();
                 Intent intent_logout = new Intent(this, LoginActivity.class);
+                intent_logout.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent_logout);
                 return true;
         }
