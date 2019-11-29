@@ -43,17 +43,19 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
         yValue = findViewById(R.id.yValue);
         zValue = findViewById(R.id.zValue);
 
+        sensorInitialize();
+    }
 
-        Log.d(TAG, "onCreate: Initializing Sensor Services");
+    private void sensorInitialize() {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.d(TAG, "onCreate: Registered accelerometer listener");
+        Log.d(TAG, "Registered accelerometer listener");
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        Log.d(TAG, "onSensorChanged: X: " + sensorEvent.values[0] + "Y: " + sensorEvent.values[1] + "Z: " + sensorEvent.values[2]);
+        Log.d("SENS0R", "onSensorChanged: X: " + sensorEvent.values[0] + "Y: " + sensorEvent.values[1] + "Z: " + sensorEvent.values[2]);
 
         xValue.setText("xValue " + sensorEvent.values[0]);
         yValue.setText("yValue " + sensorEvent.values[1]);
@@ -66,6 +68,7 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
 
     }
 
+    // Toolbar //
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -101,4 +104,18 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
         onBackPressed();
         return true;
     }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+
 }
