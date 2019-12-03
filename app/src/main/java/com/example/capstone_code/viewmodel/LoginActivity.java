@@ -18,9 +18,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-/**
- *
- */
 public class LoginActivity extends AppCompatActivity {
     private EditText emailId, password;
     private Button btnSignIn;
@@ -30,10 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-    /**
-     *
-     * @param savedInstanceState
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         };
     }
 
-    /**
-     *
-     * @param view
-     */
     public void signIn(View view) {
         String email = emailId.getText().toString();
         String pwd = password.getText().toString();
@@ -98,18 +87,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     *
-     * @param view
-     */
     public void goToRegister(View view) {
         Intent intSignUp = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intSignUp);
     }
 
-    /**
-     *
-     */
     @Override
     protected void onStart() {
         super.onStart();

@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
+/**
+ * Creates dropdown list with autocomplete options
+ */
 public class autoCompleteText {
     private String[] listOptions;
     private EditText mField;
@@ -52,24 +55,10 @@ public class autoCompleteText {
         // characters in the field
         acTextViewRoles.addTextChangedListener(new TextWatcher() {
 
-            /**
-             *
-             * @param s
-             * @param start
-             * @param count
-             * @param after
-             */
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
-            /**
-             *
-             * @param s
-             * @param start
-             * @param before
-             * @param count
-             */
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }

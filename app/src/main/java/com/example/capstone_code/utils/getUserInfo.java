@@ -1,7 +1,6 @@
 package com.example.capstone_code.utils;
 
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
@@ -15,8 +14,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Map;
 
 public class getUserInfo {
-    private ImageView mProfileImage;
-    private EditText mUserName, mRole, mSkills;
     private FirebaseAuth mAuth;
     private DatabaseReference mCustomerDatabase;
     private String userId, name, role, skills, profileImageUrl;
@@ -27,10 +24,6 @@ public class getUserInfo {
         mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
 
         mCustomerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            /**
-             *
-             * @param dataSnapshot
-             */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0) {
@@ -50,10 +43,6 @@ public class getUserInfo {
                 }
             }
 
-            /**
-             *
-             * @param databaseError
-             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 return;
