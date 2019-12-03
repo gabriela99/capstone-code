@@ -13,7 +13,6 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 
@@ -39,7 +38,7 @@ public class LoginActivityTest {
 
     @Test
     public void onCreateTest() {
-        when(mockedDatabaseReference.child(anyString())).thenReturn(mockedDatabaseReference);
+//        when(mockedDatabaseReference.child(anyString())).thenReturn(mockedDatabaseReference);
 
 //        onAuthStateChanged(new Answer<Void>() {
 //            @Override
