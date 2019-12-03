@@ -3,9 +3,7 @@ package com.example.capstone_code.viewmodel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,56 +21,49 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Put firebase outside of class - dependency injection
- */
 public class RegisterActivity extends AppCompatActivity {
     private EditText etEmailId, etPassword, etName;
-    private Button btnRegister;
-    private TextView tvSignIn;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
 
-    /**
-     *
-     * @param savedInstanceState
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        findLayoutFields();
+
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
+
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user !=null){
-                Intent intent = new Intent(RegisterActivity.this, SettingsActivity.class);
-                startActivity(intent);
-                finish();
-                return;
-            }
+                if (user !=null){
+                    Intent intent = new Intent(RegisterActivity.this, SettingsActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }
             }
         };
+    }
 
-        mAuth = FirebaseAuth.getInstance();
-
+    private void findLayoutFields() {
         etName = findViewById(R.id.etName);
         etEmailId = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-
-        btnRegister = findViewById(R.id.btnRegister);
-        tvSignIn = findViewById(R.id.btnSignIn);
     }
 
     /**
-     *
-     * @param view
+     * Called when user clicks on sign up button
+     * If user input is valid, put user info into map and update database, else return error message
      */
     public void registerUser(View view) {
+
         final String name = etName.getText().toString();
         final String email = etEmailId.getText().toString();
         final String pwd = etPassword.getText().toString();
+
         if(name.isEmpty()){
             etName.setError("Please enter your name");
             etName.requestFocus();
@@ -86,6 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
             etPassword.requestFocus();
         }
         else if(!(email.isEmpty() && pwd.isEmpty() && name.isEmpty())){
+            mAuth = FirebaseAuth.getInstance();
             mAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -107,33 +99,21 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else{
             Toast.makeText(RegisterActivity.this,"Error Occurred!",Toast.LENGTH_SHORT).show();
-
         }
-        return;
     }
 
-    /**
-     *
-     * @param view
-     */
     public void goToLogin(View view) {
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
         return;
     }
 
-    /**
-     *
-     */
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(firebaseAuthStateListener);
     }
 
-    /**
-     *
-     */
     @Override
     protected void onStop() {
         super.onStop();
